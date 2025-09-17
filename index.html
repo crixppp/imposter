@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Imposter</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preload" href="logo.png" as="image" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Splash / Loading -->
+  <section id="splash" class="view view--active" aria-label="Loading screen">
+    <div class="splash-inner">
+      <img src="logo.png" alt="Imposter logo" class="logo logo--splash" />
+      <div class="loading-dots" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <p class="visually-hidden" id="loadingText">Loading…</p>
+    </div>
+  </section>
+
+  <!-- Main Menu -->
+  <section id="menu" class="view" aria-label="Main menu" aria-hidden="true">
+    <header class="top">
+      <img src="logo.png" alt="Imposter logo" class="logo" />
+    </header>
+
+    <main class="panel">
+      <h1 class="heading">Set up your game</h1>
+
+      <form id="setupForm" class="form" autocomplete="off">
+        <div class="form-row">
+          <label for="players">Select number of players</label>
+          <input id="players" name="players" type="number" inputmode="numeric" min="3" max="12" value="6" required />
+        </div>
+
+        <div class="form-row">
+          <label for="categories">Choose categories (you can pick multiple)</label>
+          <select id="categories" name="categories" multiple size="6" aria-describedby="catHelp">
+            <!-- populated by JS from words.js -->
+          </select>
+          <small id="catHelp" class="hint">Tip: ⌘/Ctrl-click to select more than one.</small>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="btnSelectAll" class="btn btn--ghost">Select all</button>
+          <button type="submit" id="btnStart" class="btn btn--primary">Start game</button>
+        </div>
+      </form>
+    </main>
+  </section>
+
+  <!-- Reveal Screen -->
+  <section id="reveal" class="view" aria-label="Reveal screen" aria-hidden="true">
+    <header class="top">
+      <img src="logo.png" alt="Imposter logo" class="logo" />
+    </header>
+
+    <main class="reveal-card" role="button" tabindex="0" aria-describedby="revealHelp">
+      <div class="reveal-inner">
+        <p class="reveal-prompt" id="revealPrompt">Press to reveal</p>
+        <h2 class="reveal-word" id="revealWord" aria-live="polite" aria-atomic="true">—</h2>
+        <p class="reveal-role" id="revealRole">—</p>
+      </div>
+      <p class="reveal-help" id="revealHelp">Hand the device around. Each player reveals in turn.</p>
+    </main>
+  </section>
+
+  <script src="words.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
