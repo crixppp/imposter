@@ -1,37 +1,45 @@
-/* State machine for: splash -> menu -> reveal -> (cycle) */
+/* app.js — Imposter (UK English)
+   Flow: splash -> menu -> reveal (N players) -> "Tap to start" -> splash
+   Requires words.js (v3 in our thread) exposing window.ImposterWords
+*/
 
-const qs = (s, el=document) => el.querySelector(s);
-const qsa = (s, el=document) => [...el.querySelectorAll(s)];
+const qs = (s, el = document) => el.querySelector(s);
+const qsa = (s, el = document) => [...el.querySelectorAll(s)];
 
+// Views
 const views = {
   splash: qs('#splash'),
   menu: qs('#menu'),
   reveal: qs('#reveal'),
 };
 
+// Menu controls
 const form = qs('#setupForm');
 const playersInput = qs('#players');
 const categoriesSelect = qs('#categories');
 const btnSelectAll = qs('#btnSelectAll');
 
-const revealCard = qs('#reveal');
+// Reveal screen nodes
+const revealView = qs('#reveal');
 const revealMain = qs('#reveal .reveal-card');
 const revealPrompt = qs('#revealPrompt');
 const revealWord = qs('#revealWord');
 const revealRole = qs('#revealRole');
+const revealHelp = qs('#revealHelp');
+const REVEAL_HELP_BASE = 'Hand the device around. Each player reveals in turn.';
 
+// App state
 let state = {
   players: 6,
+  pool: [],
   roundWord: null,
   imposterIndex: null,
-  currentIndex: 0,           // which player is revealing right now (0-based)
-  usedWords: new Set(),      // avoid repeats across sessions until pool exhausted
-  pool: [],                  // active word pool for selected categories
+  currentIndex: 0,       // 0-based, whose turn it is to reveal
+  onceNextTap: false,    // flag used on reveal card to jump back to start
 };
 
-/* ---------- Utilities ---------- */
-
-function showView(name){
+// ---------- Utilities ----------
+function showView(name) {
   Object.entries(views).forEach(([key, node]) => {
     const active = key === name;
     node.classList.toggle('view--active', active);
@@ -39,41 +47,39 @@ function showView(name){
   });
 }
 
-function shuffle(arr){
-  for(let i = arr.length - 1; i > 0; i--){
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
 }
 
-function pickWord(){
-  if(state.pool.length === 0){
-    console.warn('Empty pool; using all packs.');
-    buildPool(Object.keys(window.WORD_PACKS));
-  }
-  // Filter out used words if possible; if all used, clear memory
-  const fresh = state.pool.filter(w => !state.usedWords.has(w));
-  const source = fresh.length ? fresh : state.pool;
-  const word = source[Math.floor(Math.random() * source.length)];
-  if (fresh.length) state.usedWords.add(word);
-  return word;
-}
-
-function buildPool(selectedCats){
+function buildPool(selectedCats) {
+  const packs = window.WORD_PACKS || {};
   const pool = [];
   selectedCats.forEach(cat => {
-    const list = window.WORD_PACKS[cat] || [];
+    const list = packs[cat] || [];
     pool.push(...list);
   });
   state.pool = shuffle(pool);
 }
 
-/* ---------- Init ---------- */
+// ---------- Splash ----------
+function startSplash() {
+  showView('splash');
+  // Short, sleek fake load then drop to menu
+  setTimeout(() => {
+    showView('menu');
+    playersInput?.focus?.({ preventScroll: true });
+  }, 1200);
+}
 
-function populateCategories(){
-  const packs = window.WORD_PACKS;
+// ---------- Menu ----------
+function populateCategories() {
+  const packs = window.WORD_PACKS || {};
   const cats = Object.keys(packs);
+  categoriesSelect.innerHTML = '';
   cats.forEach(cat => {
     const opt = document.createElement('option');
     opt.value = cat;
@@ -81,41 +87,25 @@ function populateCategories(){
     categoriesSelect.appendChild(opt);
   });
   // Default: select all
-  qsa('option', categoriesSelect).forEach(o => o.selected = true);
+  qsa('option', categoriesSelect).forEach(o => (o.selected = true));
 }
 
-function startSplash(){
-  showView('splash');
-  // Simulated short load, then menu
-  setTimeout(() => {
-    showView('menu');
-    // Ensure focus lands sensibly
-    playersInput.focus({preventScroll:true});
-  }, 1200);
-}
-
-/* ---------- Menu handlers ---------- */
-
-btnSelectAll.addEventListener('click', () => {
+btnSelectAll?.addEventListener('click', () => {
   const all = qsa('option', categoriesSelect);
   const anyUnselected = all.some(o => !o.selected);
-  all.forEach(o => o.selected = anyUnselected); // toggle to "all" if any missing, otherwise deselect all
+  all.forEach(o => (o.selected = anyUnselected));
   categoriesSelect.dispatchEvent(new Event('change'));
 });
 
-categoriesSelect.addEventListener('change', () => {
-  // Nothing required; left for future UI badges, etc.
-});
-
-form.addEventListener('submit', (e) => {
+form?.addEventListener('submit', (e) => {
   e.preventDefault();
   const players = Number(playersInput.value);
-  if(Number.isNaN(players) || players < 3 || players > 12){
+  if (Number.isNaN(players) || players < 3 || players > 12) {
     alert('Please choose between 3 and 12 players.');
     return;
   }
   const selectedCats = qsa('option:checked', categoriesSelect).map(o => o.value);
-  if(selectedCats.length === 0){
+  if (selectedCats.length === 0) {
     alert('Choose at least one category.');
     return;
   }
@@ -124,69 +114,95 @@ form.addEventListener('submit', (e) => {
   beginRound();
 });
 
-/* ---------- Round / Reveal flow ---------- */
+// ---------- Round / Reveal ----------
+function beginRound() {
+  // Pick a word via anti-repeat logic from words.js
+  try {
+    state.roundWord = window.ImposterWords.nextWord(state.pool);
+  } catch (err) {
+    console.error(err);
+    alert('No words available. Please choose categories again.');
+    showView('menu');
+    return;
+  }
 
-function beginRound(){
-  // Pick word + imposter
-  state.roundWord = pickWord();
+  // Randomly choose the imposter index
   state.imposterIndex = Math.floor(Math.random() * state.players);
   state.currentIndex = 0;
-  prepareRevealCardIntro();
+  state.onceNextTap = false;
+
+  // Prepare reveal UI
+  resetRevealCardToBlank();
   showView('reveal');
 }
 
-function prepareRevealCardIntro(){
+function resetRevealCardToBlank() {
   revealPrompt.textContent = 'Press to reveal';
   revealWord.textContent = '—';
   revealRole.textContent = '—';
-  // Reset aria politely
-  revealWord.setAttribute('aria-live','polite');
+  revealHelp.textContent = REVEAL_HELP_BASE;
+  revealMain.classList.remove('anim-in', 'anim-out');
 }
 
-function doRevealForCurrent(){
-  const isImposter = state.currentIndex === state.imposterIndex;
-  revealPrompt.textContent = `Player ${state.currentIndex + 1}`;
-  if(isImposter){
+function doRevealForCurrent() {
+  const index = state.currentIndex;
+  const isImposter = index === state.imposterIndex;
+
+  revealPrompt.textContent = `Player ${index + 1}`;
+
+  if (isImposter) {
+    // Imposter sees IMPOSER, no hint
     revealWord.textContent = 'IMPOSTER';
     revealRole.textContent = 'You are the imposter';
-  }else{
-    revealWord.textContent = state.roundWord.toUpperCase();
+    revealHelp.textContent = REVEAL_HELP_BASE;
+  } else {
+    // Civilian sees the round word (upper for drama) and a subtle hint
+    const word = (state.roundWord || '').toUpperCase();
+    revealWord.textContent = word;
     revealRole.textContent = 'You are not the imposter';
+
+    // Optional hint (close-but-different) — appended to help line
+    const hint = window.ImposterWords.getHint(state.roundWord);
+    if (hint) {
+      revealHelp.textContent = `${REVEAL_HELP_BASE}  Hint: ${hint}`;
+    } else {
+      revealHelp.textContent = REVEAL_HELP_BASE;
+    }
   }
 }
 
-function advanceOrFinish(){
+function advanceOrFinish() {
   state.currentIndex++;
-  if(state.currentIndex < state.players){
-    // reset to prompt for next person
-    prepareRevealCardIntro();
-  }else{
-    // Last person has seen theirs; prompt to start again
+  if (state.currentIndex < state.players) {
+    // Next player — reset to blank prompt
+    resetRevealCardToBlank();
+  } else {
+    // All players have revealed
     revealPrompt.textContent = 'Round ready';
     revealWord.textContent = '—';
     revealRole.textContent = 'Tap to start';
-    // Next tap goes back to splash -> menu loop
-    revealMain.onceNextTap = true;
+    revealHelp.textContent = 'Start a new round.';
+    state.onceNextTap = true;
   }
 }
 
-/* Smooth “tap anywhere” interactions */
-function handleRevealTap(){
-  if(revealMain.onceNextTap){
-    revealMain.onceNextTap = false;
-    // Return to splash (short), then menu
+// Smooth tap/keyboard handling
+function handleRevealTap() {
+  // If ready to start a new round, go back to splash -> menu
+  if (state.onceNextTap) {
+    state.onceNextTap = false;
     startSplash();
     return;
   }
 
   const currentlyBlank = revealWord.textContent === '—';
-  if(currentlyBlank){
-    // Animate in the word
+  if (currentlyBlank) {
+    // Animate in the reveal
     revealMain.classList.remove('anim-out');
     revealMain.classList.add('anim-in');
     doRevealForCurrent();
-  }else{
-    // Animate out and move to next
+  } else {
+    // Animate out, then advance to next player / finish
     revealMain.classList.remove('anim-in');
     revealMain.classList.add('anim-out');
     setTimeout(() => {
@@ -196,44 +212,19 @@ function handleRevealTap(){
   }
 }
 
-/* Keyboard support */
-revealMain.addEventListener('click', handleRevealTap);
-revealMain.addEventListener('keydown', (e) => {
-  if(e.key === 'Enter' || e.key === ' '){
-    e.preventDefault(); handleRevealTap();
+// Click + keyboard
+revealMain?.addEventListener('click', handleRevealTap);
+revealMain?.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    handleRevealTap();
   }
 });
 
-/* Small animation helper via class hooks */
-(function attachAnimStyles(){
-  const style = document.createElement('style');
-  style.textContent = `
-  .reveal-card.anim-in .reveal-word{
-    animation: wordIn 240ms cubic-bezier(.2,.9,.2,1) both;
-  }
-  .reveal-card.anim-in .reveal-role{
-    animation: roleIn 280ms cubic-bezier(.2,.9,.2,1) both 40ms;
-  }
-  .reveal-card.anim-out .reveal-word,
-  .reveal-card.anim-out .reveal-role{
-    animation: fadeDown 200ms ease both;
-  }
-  @keyframes wordIn{
-    from{opacity:0; transform:translateY(8px) scale(.98)}
-    to{opacity:1; transform:translateY(0) scale(1)}
-  }
-  @keyframes roleIn{
-    from{opacity:0; transform:translateY(6px)}
-    to{opacity:1; transform:translateY(0)}
-  }
-  @keyframes fadeDown{
-    to{opacity:0; transform:translateY(6px)}
-  }`;
-  document.head.appendChild(style);
-})();
-
-/* Startup */
+// ---------- Boot ----------
 window.addEventListener('DOMContentLoaded', () => {
+  // Populate categories from words.js packs
   populateCategories();
+  // Kick off the splash → menu sequence
   startSplash();
 });
