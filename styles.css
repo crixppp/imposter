@@ -59,6 +59,8 @@ input:disabled {
   min-height: 100vh;
   margin: 0 auto;
   padding: 18px 0 36px;
+  display: flex;
+  flex-direction: column;
 }
 
 .topbar {
@@ -95,7 +97,16 @@ input:disabled {
 }
 
 .app {
+  flex: 1;
   display: block;
+}
+
+.site-credit {
+  margin-top: 28px;
+  color: var(--quiet);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-align: center;
 }
 
 .screen {
@@ -318,7 +329,7 @@ h3 {
 .player-row,
 .score-row,
 .order-row,
-.vote-row,
+vote-row,
 .tally-row {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
@@ -557,7 +568,7 @@ h3 {
 .order-list,
 .vote-list,
 .tally-list,
-.rules-list,
+rules-list,
 .score-list {
   display: grid;
   gap: 8px;
