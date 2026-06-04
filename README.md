@@ -4,7 +4,7 @@ A one-device party word game for bluffing, clue-giving, voting, and dramatic acc
 
 ## Play
 
-This repo is built as a static GitHub Pages site. Publish from the `main` branch root and open:
+This repo is built as a static GitHub Pages site. It deploys from the `main` branch with GitHub Actions:
 
 https://crixppp.github.io/imposter/
 
