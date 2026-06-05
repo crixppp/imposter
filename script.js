@@ -1,18 +1,18 @@
 const STORAGE_KEY = "imposter-scores-v1";
 
 const DEFAULT_NAMES = [
-  "Alex",
-  "Blair",
-  "Casey",
-  "Drew",
-  "Ellis",
-  "Frankie",
-  "Gray",
-  "Harper",
-  "Indie",
-  "Jules",
-  "Kai",
-  "Logan"
+  "Sam",
+  "Will",
+  "Josie",
+  "Jacquie",
+  "Finn",
+  "Bailey",
+  "Bridget",
+  "Eloise",
+  "Emily",
+  "Xavier",
+  "Charlie",
+  "shmungus"
 ];
 
 const WORD_BANK = {
