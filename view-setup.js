@@ -121,6 +121,22 @@ function renderRulesModal() {
               </div>
             `).join("")}
           </div>
+
+          <div class="rules-list" style="margin-top: 18px;">
+            <div class="field-label">Scoring</div>
+            ${[
+              ["Players +1", "Non-imposters score if they catch an imposter and the final guess misses."],
+              ["Imposters +1", "Imposters score if they guess the word after being caught or the vote ends tied."],
+              ["Imposters +2", "Imposters get the bonus when the group votes out a normal player."],
+              ["Names matter", "Scores stay attached to the player name on the setup screen."]
+            ].map(([label, detail]) => `
+              <div class="order-row">
+                <span class="score-pill">${escapeHtml(label)}</span>
+                <strong>${escapeHtml(detail)}</strong>
+                <span></span>
+              </div>
+            `).join("")}
+          </div>
         </div>
       </section>
     </div>

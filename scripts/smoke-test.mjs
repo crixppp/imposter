@@ -133,6 +133,7 @@ const result = vm.runInContext(`
     shortHintEntries,
     setupHasRulesButton: setupHtml.includes('data-action="open-rules"'),
     rulesDialogVisible: state.rulesOpen === false && rulesHtml.includes('role="dialog"') && rulesHtml.includes("Caught imposters"),
+    rulesHasScoringGuide: rulesHtml.includes("Scoring") && rulesHtml.includes("Players +1") && rulesHtml.includes("Imposters +2"),
     noRepeatCount: new Set(pickedWords).size,
     noRepeatTotal: pickedWords.length,
     thirteenthWord,
@@ -153,6 +154,7 @@ assert.equal(result.unsafeHints.length, 0);
 assert.equal(result.shortHintEntries.length, 0);
 assert.equal(result.setupHasRulesButton, true);
 assert.equal(result.rulesDialogVisible, true);
+assert.equal(result.rulesHasScoringGuide, true);
 assert.equal(result.noRepeatCount, 12);
 assert.equal(result.noRepeatTotal, 12);
 assert.equal(typeof result.thirteenthWord, "string");
