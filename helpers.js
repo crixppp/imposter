@@ -55,16 +55,40 @@ function validatePlayers(players) {
 }
 
 function pickSecretWord(categoryKeys, difficulty) {
-  const categoryKey = sample(categoryKeys);
-  const category = WORD_BANK[categoryKey];
-  const entry = sample(category.words[difficulty]);
+  const pool = getWordPool(categoryKeys, difficulty);
+  let available = pool.filter((item) => !state.usedWordKeys.includes(item.key));
+
+  if (!available.length) {
+    const poolKeys = pool.map((item) => item.key);
+    state.usedWordKeys = state.usedWordKeys.filter((key) => !poolKeys.includes(key));
+    available = pool;
+  }
+
+  const picked = sample(available);
+  state.usedWordKeys.push(picked.key);
 
   return {
-    word: wordText(entry),
-    hint: wordHint(entry),
-    categoryKey,
-    categoryLabel: category.label
+    word: wordText(picked.entry),
+    hint: wordHint(picked.entry),
+    categoryKey: picked.categoryKey,
+    categoryLabel: picked.category.label
   };
+}
+
+function getWordPool(categoryKeys, difficulty) {
+  return categoryKeys.flatMap((categoryKey) => {
+    const category = WORD_BANK[categoryKey];
+    return category.words[difficulty].map((entry) => ({
+      key: makeWordKey(categoryKey, difficulty, wordText(entry)),
+      categoryKey,
+      category,
+      entry
+    }));
+  });
+}
+
+function makeWordKey(categoryKey, difficulty, word) {
+  return `${categoryKey}:${difficulty}:${normalizeGuess(word)}`;
 }
 
 function balancedClueOrder(players) {
@@ -139,7 +163,30 @@ function wordText(entry) {
 }
 
 function wordHint(entry) {
-  return Array.isArray(entry) ? entry[1] : "";
+  const hints = safeHints(entry);
+  return hints.length ? sample(hints) : "Mystery";
+}
+
+function safeHints(entry) {
+  const word = wordText(entry);
+  const hints = Array.isArray(entry) && Array.isArray(entry[1]) ? entry[1] : [Array.isArray(entry) ? entry[1] : ""];
+
+  return unique(hints)
+    .map((hint) => String(hint || "").trim())
+    .filter((hint) => isSafeHint(word, hint));
+}
+
+function isSafeHint(word, hint) {
+  const normalizedWord = normalizeGuess(word).replaceAll(" ", "");
+  const normalizedHint = normalizeGuess(hint).replaceAll(" ", "");
+  return Boolean(
+    hint &&
+    !/\s/.test(hint) &&
+    normalizedHint &&
+    normalizedHint !== normalizedWord &&
+    !normalizedWord.includes(normalizedHint) &&
+    !normalizedHint.includes(normalizedWord)
+  );
 }
 
 function maxImposters(playerCount) {

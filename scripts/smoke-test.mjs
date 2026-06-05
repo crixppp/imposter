@@ -1,0 +1,176 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import vm from "node:vm";
+
+const scriptFiles = [
+  "words.js",
+  "words-food.js",
+  "words-animals.js",
+  "words-places.js",
+  "words-objects.js",
+  "words-movies.js",
+  "words-brands.js",
+  "words-jobs.js",
+  "words-moments.js",
+  "script.js",
+  "helpers.js",
+  "actions.js",
+  "round.js",
+  "render-core.js",
+  "view-setup.js",
+  "view-play.js",
+  "view-result.js",
+  "boot.js"
+];
+
+const app = {
+  innerHTML: "",
+  addEventListener() {}
+};
+
+const topbarActions = {
+  innerHTML: "",
+  addEventListener() {}
+};
+
+const storage = new Map();
+const sandbox = {
+  console,
+  document: {
+    querySelector(selector) {
+      if (selector === "#app") return app;
+      if (selector === "#topbar-actions") return topbarActions;
+      return null;
+    }
+  },
+  window: {
+    localStorage: {
+      getItem(key) {
+        return storage.get(key) || null;
+      },
+      setItem(key, value) {
+        storage.set(key, String(value));
+      }
+    },
+    setInterval() {
+      return 1;
+    },
+    clearInterval() {}
+  }
+};
+
+const context = vm.createContext(sandbox);
+for (const file of scriptFiles) {
+  vm.runInContext(fs.readFileSync(file, "utf8"), context, { filename: file });
+}
+
+const result = vm.runInContext(`
+(() => {
+  const normalize = (value) => String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "");
+
+  const entries = Object.entries(WORD_BANK).flatMap(([categoryKey, category]) =>
+    Object.entries(category.words).flatMap(([difficulty, words]) =>
+      words.map(([word, hints]) => ({ categoryKey, difficulty, word, hints }))
+    )
+  );
+
+  const unsafeHints = entries.flatMap(({ word, hints }) => {
+    const wordKey = normalize(word);
+    return (Array.isArray(hints) ? hints : [hints])
+      .map((hint) => String(hint || "").trim())
+      .filter((hint) => {
+        const hintKey = normalize(hint);
+        return !hint || /\\s/.test(hint) || !hintKey || hintKey === wordKey || wordKey.includes(hintKey) || hintKey.includes(wordKey);
+      })
+      .map((hint) => ({ word, hint }));
+  });
+
+  const shortHintEntries = entries.filter(({ hints }) => !Array.isArray(hints) || hints.length < 2);
+
+  state.phase = "setup";
+  state.rulesOpen = false;
+  const setupHtml = renderSetup();
+  handleClick({ target: { closest: () => ({ dataset: { action: "open-rules" } }) } });
+  const rulesHtml = renderSetup();
+  handleClick({ target: { closest: () => ({ dataset: { action: "close-rules" } }) } });
+
+  state.settings.categories = ["food"];
+  state.settings.difficulty = "medium";
+  state.usedWordKeys = [];
+  const pickedWords = Array.from({ length: 12 }, () => pickSecretWord(selectedCategoryKeys(), state.settings.difficulty).word);
+  const thirteenthWord = pickSecretWord(selectedCategoryKeys(), state.settings.difficulty).word;
+
+  state.settings = {
+    playerCount: 5,
+    imposterCount: 1,
+    roundCount: 3,
+    categories: ["food"],
+    difficulty: "medium",
+    mode: "classic",
+    discussionSeconds: 120
+  };
+  state.names = DEFAULT_NAMES.slice(0, 5);
+  state.usedWordKeys = [];
+  startRound();
+  state.phase = "voting";
+  state.round.voteOpen = true;
+  state.round.voteIndex = 0;
+  const voter = state.round.players[0];
+  const candidate = getVoteCandidates(voter.id)[0];
+  const ballotHtml = renderVoting();
+  handleClick({ target: { closest: () => ({ dataset: { action: "select-vote", value: String(candidate.id) } }) } });
+  const selectedHtml = renderVoting();
+  const votesBeforeConfirm = Object.keys(state.round.votes).length;
+  handleClick({ target: { closest: () => ({ dataset: { action: "confirm-vote" } }) } });
+
+  return {
+    entryCount: entries.length,
+    categoryCount: Object.keys(WORD_BANK).length,
+    unsafeHints,
+    shortHintEntries,
+    setupHasRulesButton: setupHtml.includes('data-action="open-rules"'),
+    rulesDialogVisible: state.rulesOpen === false && rulesHtml.includes('role="dialog"') && rulesHtml.includes("Caught imposters"),
+    noRepeatCount: new Set(pickedWords).size,
+    noRepeatTotal: pickedWords.length,
+    thirteenthWord,
+    usedWordsAfterReset: state.usedWordKeys.length,
+    ballotUsesSelect: ballotHtml.includes('data-action="select-vote"') && !ballotHtml.includes('data-action="cast-vote"'),
+    selectedShowsConfirm: selectedHtml.includes("Confirm vote"),
+    votesBeforeConfirm,
+    voteIndexAfterConfirm: state.round.voteIndex,
+    recordedVote: state.round.votes[voter.id],
+    candidateId: candidate.id
+  };
+})()
+`, context);
+
+assert.equal(result.categoryCount, 8);
+assert.equal(result.entryCount, 288);
+assert.equal(result.unsafeHints.length, 0);
+assert.equal(result.shortHintEntries.length, 0);
+assert.equal(result.setupHasRulesButton, true);
+assert.equal(result.rulesDialogVisible, true);
+assert.equal(result.noRepeatCount, 12);
+assert.equal(result.noRepeatTotal, 12);
+assert.equal(typeof result.thirteenthWord, "string");
+assert.equal(result.usedWordsAfterReset, 1);
+assert.equal(result.ballotUsesSelect, true);
+assert.equal(result.selectedShowsConfirm, true);
+assert.equal(result.votesBeforeConfirm, 0);
+assert.equal(result.voteIndexAfterConfirm, 1);
+assert.equal(result.recordedVote, result.candidateId);
+
+const indexHtml = fs.readFileSync("index.html", "utf8");
+assert.match(indexHtml, /favicon\.png\?v=20260605/);
+assert.doesNotMatch(indexHtml, /favicon-\d+\.png/);
+
+const css = ["styles-1.css", "styles-2.css", "styles-3.css"]
+  .map((file) => fs.readFileSync(file, "utf8"))
+  .join("\n");
+assert.match(css, /:active/);
+assert.match(css, /modal-backdrop/);
+
+console.log("Smoke test passed");

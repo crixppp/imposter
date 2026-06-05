@@ -67,6 +67,7 @@ function renderSetup() {
 
             <div class="actions">
               <button class="primary" type="button" data-action="start-round">Start round</button>
+              <button class="secondary" type="button" data-action="open-rules">Rules</button>
               <button class="secondary" type="button" data-action="randomize-names">Shuffle names</button>
             </div>
           </div>
@@ -92,6 +93,37 @@ function renderSetup() {
         </div>
       </aside>
     </section>
+    ${state.rulesOpen ? renderRulesModal() : ""}
+  `;
+}
+
+function renderRulesModal() {
+  return `
+    <div class="modal-backdrop" role="presentation">
+      <section class="panel rules-modal" role="dialog" aria-modal="true" aria-labelledby="rules-title">
+        <div class="panel-head">
+          <h2 id="rules-title">Rules</h2>
+          <button class="icon-button" type="button" data-action="close-rules" aria-label="Close rules">x</button>
+        </div>
+        <div class="panel-body">
+          <div class="rules-list">
+            ${[
+              "Read your role privately.",
+              "Take turns giving one clue.",
+              "Do not spell, rhyme, translate, or say the word.",
+              "Discuss, vote, then reveal the accused.",
+              "Caught imposters get one final guess."
+            ].map((rule, index) => `
+              <div class="order-row">
+                <span class="index-pill">${index + 1}</span>
+                <strong>${escapeHtml(rule)}</strong>
+                <span></span>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      </section>
+    </div>
   `;
 }
 

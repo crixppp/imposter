@@ -4,151 +4,259 @@ window.IMPOSTER_WORD_BANK.objects = {
     "easy": [
       [
         "Phone",
-        "Pocket"
+        [
+          "Pocket",
+          "Charger"
+        ]
       ],
       [
         "Chair",
-        "Cushion"
+        [
+          "Cushion",
+          "Table"
+        ]
       ],
       [
         "Umbrella",
-        "Rain"
+        [
+          "Rain",
+          "Storm"
+        ]
       ],
       [
         "Backpack",
-        "Zipper"
+        [
+          "Zipper",
+          "Straps"
+        ]
       ],
       [
         "Candle",
-        "Flame"
+        [
+          "Flame",
+          "Wax"
+        ]
       ],
       [
         "Mirror",
-        "Reflection"
+        [
+          "Reflection",
+          "Vanity"
+        ]
       ],
       [
         "Keys",
-        "Jingle"
+        [
+          "Jingle",
+          "Door"
+        ]
       ],
       [
         "Toothbrush",
-        "Mint"
+        [
+          "Mint",
+          "Paste"
+        ]
       ],
       [
         "Pillow",
-        "Dream"
+        [
+          "Dream",
+          "Nap"
+        ]
       ],
       [
         "Scissors",
-        "Paper"
+        [
+          "Paper",
+          "Cut"
+        ]
       ],
       [
         "Clock",
-        "Tick"
+        [
+          "Tick",
+          "Alarm"
+        ]
       ],
       [
         "Glasses",
-        "Lens"
+        [
+          "Lens",
+          "Frames"
+        ]
       ]
     ],
     "medium": [
       [
         "Suitcase",
-        "Airport"
+        [
+          "Airport",
+          "Luggage"
+        ]
       ],
       [
         "Blender",
-        "Smoothie"
+        [
+          "Smoothie",
+          "Blade"
+        ]
       ],
       [
         "Headphones",
-        "Playlist"
+        [
+          "Playlist",
+          "Volume"
+        ]
       ],
       [
         "Skateboard",
-        "Ramp"
+        [
+          "Ramp",
+          "Wheels"
+        ]
       ],
       [
         "Passport",
-        "Stamp"
+        [
+          "Stamp",
+          "Border"
+        ]
       ],
       [
         "Remote",
-        "Couch"
+        [
+          "Couch",
+          "Buttons"
+        ]
       ],
       [
         "Blanket",
-        "Cocoon"
+        [
+          "Cocoon",
+          "Warmth"
+        ]
       ],
       [
         "Laptop",
-        "Keyboard"
+        [
+          "Keyboard",
+          "Screen"
+        ]
       ],
       [
         "Flashlight",
-        "Battery"
+        [
+          "Battery",
+          "Torch"
+        ]
       ],
       [
         "Notebook",
-        "Margins"
+        [
+          "Margins",
+          "Notes"
+        ]
       ],
       [
         "Wallet",
-        "Receipt"
+        [
+          "Receipt",
+          "Cash"
+        ]
       ],
       [
         "Microphone",
-        "Echo"
+        [
+          "Echo",
+          "Stage"
+        ]
       ]
     ],
     "hard": [
       [
         "Compass",
-        "North"
+        [
+          "North",
+          "Needle"
+        ]
       ],
       [
         "Typewriter",
-        "Ribbon"
+        [
+          "Ribbon",
+          "Keys"
+        ]
       ],
       [
         "Telescope",
-        "Moon"
+        [
+          "Moon",
+          "Stars"
+        ]
       ],
       [
         "Incense",
-        "Smoke"
+        [
+          "Smoke",
+          "Temple"
+        ]
       ],
       [
         "Record player",
-        "Vinyl"
+        [
+          "Vinyl",
+          "Needle"
+        ]
       ],
       [
         "Projector",
-        "Screen"
+        [
+          "Screen",
+          "Cinema"
+        ]
       ],
       [
         "Thermos",
-        "Steam"
+        [
+          "Steam",
+          "Coffee"
+        ]
       ],
       [
         "Tripod",
-        "Camera"
+        [
+          "Camera",
+          "Lens"
+        ]
       ],
       [
         "Abacus",
-        "Beads"
+        [
+          "Beads",
+          "Counting"
+        ]
       ],
       [
         "Sundial",
-        "Shadow"
+        [
+          "Shadow",
+          "Noon"
+        ]
       ],
       [
         "Metronome",
-        "Tempo"
+        [
+          "Tempo",
+          "Rhythm"
+        ]
       ],
       [
         "Carabiner",
-        "Clip"
+        [
+          "Clip",
+          "Climb"
+        ]
       ]
     ]
   }

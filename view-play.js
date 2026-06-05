@@ -130,6 +130,7 @@ function renderDiscussion() {
 function renderVoting() {
   const voter = state.round.players[state.round.voteIndex];
   const candidates = getVoteCandidates(voter.id);
+  const pendingVote = state.round.pendingVoteId ? getPlayer(state.round.pendingVoteId) : null;
 
   if (!state.round.voteOpen) {
     return `
@@ -160,12 +161,21 @@ function renderVoting() {
         <div class="panel-body">
           <div class="vote-list">
             ${candidates.map((candidate) => `
-              <button class="vote-choice" data-action="cast-vote" data-value="${candidate.id}">
+              <button class="vote-choice${state.round.pendingVoteId === candidate.id ? " selected" : ""}" data-action="select-vote" data-value="${candidate.id}">
                 <span class="index-pill">${candidate.displayIndex}</span>
                 <strong>${escapeHtml(candidate.name)}</strong>
               </button>
             `).join("")}
           </div>
+          ${pendingVote ? `
+            <div class="vote-confirm">
+              <p class="small-note">Vote for <strong>${escapeHtml(pendingVote.name)}</strong>?</p>
+              <div class="actions">
+                <button class="primary" data-action="confirm-vote">Confirm vote</button>
+                <button class="secondary" data-action="clear-vote">Change</button>
+              </div>
+            </div>
+          ` : ""}
         </div>
       </div>
     </section>

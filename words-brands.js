@@ -4,151 +4,259 @@ window.IMPOSTER_WORD_BANK.brands = {
     "easy": [
       [
         "Nike",
-        "Marathon"
+        [
+          "Marathon",
+          "Swoosh"
+        ]
       ],
       [
         "Apple",
-        "Orchard"
+        [
+          "Orchard",
+          "iPhone"
+        ]
       ],
       [
         "McDonald's",
-        "Drive"
+        [
+          "Drive",
+          "Fries"
+        ]
       ],
       [
         "Kmart",
-        "Trolley"
+        [
+          "Trolley",
+          "Shelves"
+        ]
       ],
       [
         "Lego",
-        "Brick"
+        [
+          "Brick",
+          "Studs"
+        ]
       ],
       [
         "Coca-Cola",
-        "Fizz"
+        [
+          "Fizz",
+          "Bubbles"
+        ]
       ],
       [
         "YouTube",
-        "Play"
+        [
+          "Play",
+          "Subscribe"
+        ]
       ],
       [
         "Google",
-        "Search"
+        [
+          "Search",
+          "Maps"
+        ]
       ],
       [
         "Target",
-        "Bullseye"
+        [
+          "Bullseye",
+          "Cart"
+        ]
       ],
       [
         "Amazon",
-        "Parcel"
+        [
+          "Parcel",
+          "Box"
+        ]
       ],
       [
         "Disney",
-        "Castle"
+        [
+          "Castle",
+          "Mouse"
+        ]
       ],
       [
         "Coles",
-        "Checkout"
+        [
+          "Checkout",
+          "Groceries"
+        ]
       ]
     ],
     "medium": [
       [
         "Netflix",
-        "Queue"
+        [
+          "Queue",
+          "Remote"
+        ]
       ],
       [
         "Spotify",
-        "Playlist"
+        [
+          "Playlist",
+          "Shuffle"
+        ]
       ],
       [
         "Nintendo",
-        "Controller"
+        [
+          "Controller",
+          "Switch"
+        ]
       ],
       [
         "IKEA",
-        "Flatpack"
+        [
+          "Flatpack",
+          "Allen"
+        ]
       ],
       [
         "Tesla",
-        "Charging"
+        [
+          "Charging",
+          "Battery"
+        ]
       ],
       [
         "Uber",
-        "Pickup"
+        [
+          "Pickup",
+          "Driver"
+        ]
       ],
       [
         "Adidas",
-        "Stripes"
+        [
+          "Stripes",
+          "Sneakers"
+        ]
       ],
       [
         "PlayStation",
-        "Triangle"
+        [
+          "Triangle",
+          "Console"
+        ]
       ],
       [
         "Samsung",
-        "Galaxy"
+        [
+          "Galaxy",
+          "Screen"
+        ]
       ],
       [
         "Bunnings",
-        "Sausage"
+        [
+          "Sausage",
+          "Hammer"
+        ]
       ],
       [
         "KFC",
-        "Bucket"
+        [
+          "Bucket",
+          "Colonel"
+        ]
       ],
       [
         "Cadbury",
-        "Purple"
+        [
+          "Purple",
+          "Chocolate"
+        ]
       ]
     ],
     "hard": [
       [
         "Patagonia",
-        "Fleece"
+        [
+          "Fleece",
+          "Mountains"
+        ]
       ],
       [
         "Duolingo",
-        "Streak"
+        [
+          "Streak",
+          "Owl"
+        ]
       ],
       [
         "Supreme",
-        "Drop"
+        [
+          "Drop",
+          "Sticker"
+        ]
       ],
       [
         "Rolex",
-        "Crown"
+        [
+          "Crown",
+          "Watch"
+        ]
       ],
       [
         "Airbnb",
-        "Keys"
+        [
+          "Keys",
+          "Pillow"
+        ]
       ],
       [
         "Canva",
-        "Template"
+        [
+          "Template",
+          "Design"
+        ]
       ],
       [
         "Red Bull",
-        "Wings"
+        [
+          "Wings",
+          "Energy"
+        ]
       ],
       [
         "Starbucks",
-        "Siren"
+        [
+          "Siren",
+          "Mermaid"
+        ]
       ],
       [
         "GoPro",
-        "Helmet"
+        [
+          "Helmet",
+          "Surf"
+        ]
       ],
       [
         "Dyson",
-        "Vacuum"
+        [
+          "Vacuum",
+          "Cyclone"
+        ]
       ],
       [
         "Gucci",
-        "Runway"
+        [
+          "Runway",
+          "Logo"
+        ]
       ],
       [
         "Atlassian",
-        "Tickets"
+        [
+          "Tickets",
+          "Jira"
+        ]
       ]
     ]
   }

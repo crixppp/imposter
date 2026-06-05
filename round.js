@@ -32,6 +32,7 @@ function startRound() {
     clueIndex: 0,
     voteIndex: 0,
     voteOpen: false,
+    pendingVoteId: null,
     voteCandidates: null,
     votes: {},
     tiedIds: [],
@@ -53,6 +54,7 @@ function beginVoting(candidateIds) {
   clearTimer();
   state.round.voteIndex = 0;
   state.round.voteOpen = false;
+  state.round.pendingVoteId = null;
   state.round.votes = {};
   state.round.voteCandidates = Array.isArray(candidateIds) && candidateIds.length ? candidateIds : null;
   state.round.tieRound = state.round.voteCandidates ? state.round.tieRound + 1 : 0;
@@ -64,6 +66,7 @@ function castVote(accusedId) {
   const voter = state.round.players[state.round.voteIndex];
   state.round.votes[voter.id] = accusedId;
   state.round.voteOpen = false;
+  state.round.pendingVoteId = null;
   state.round.voteIndex += 1;
 
   if (state.round.voteIndex >= state.round.players.length) {

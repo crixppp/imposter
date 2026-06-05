@@ -80,6 +80,12 @@
   box-shadow: 4px 4px 0 var(--ink);
 }
 
+.vote-confirm {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid var(--ink);
+}
+
 .small-note {
   color: var(--muted);
   font-size: 0.95rem;
@@ -157,6 +163,22 @@
   display: none !important;
 }
 
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(16, 16, 20, 0.34);
+}
+
+.rules-modal {
+  width: min(560px, 100%);
+  max-height: min(680px, calc(100vh - 36px));
+  overflow: auto;
+}
+
 @media (max-width: 880px) {
   .page-shell {
     width: min(100vw - 18px, 680px);
@@ -208,4 +230,3 @@
     transition: none !important;
   }
 }
-

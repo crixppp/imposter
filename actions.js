@@ -66,7 +66,18 @@ function handleClick(event) {
     render();
   }
 
+  if (action === "open-rules") {
+    state.rulesOpen = true;
+    render();
+  }
+
+  if (action === "close-rules") {
+    state.rulesOpen = false;
+    render();
+  }
+
   if (action === "start-round") {
+    state.rulesOpen = false;
     startRound();
   }
 
@@ -136,11 +147,24 @@ function handleClick(event) {
 
   if (action === "show-vote") {
     state.round.voteOpen = true;
+    state.round.pendingVoteId = null;
     render();
   }
 
-  if (action === "cast-vote") {
-    castVote(Number(value));
+  if (action === "select-vote") {
+    state.round.pendingVoteId = Number(value);
+    render();
+  }
+
+  if (action === "clear-vote") {
+    state.round.pendingVoteId = null;
+    render();
+  }
+
+  if (action === "confirm-vote") {
+    if (state.round.pendingVoteId) {
+      castVote(state.round.pendingVoteId);
+    }
   }
 
   if (action === "revote") {
@@ -180,6 +204,7 @@ function handleClick(event) {
   if (action === "same-group") {
     state.phase = "setup";
     state.error = "";
+    state.rulesOpen = false;
     state.round = null;
     render();
   }
@@ -189,6 +214,7 @@ function handleClick(event) {
     state.phase = "setup";
     state.round = null;
     state.error = "";
+    state.rulesOpen = false;
     state.settings = {
       playerCount: 5,
       imposterCount: 1,

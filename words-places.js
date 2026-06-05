@@ -4,151 +4,259 @@ window.IMPOSTER_WORD_BANK.places = {
     "easy": [
       [
         "Beach",
-        "Towel"
+        [
+          "Towel",
+          "Shell"
+        ]
       ],
       [
         "School",
-        "Bell"
+        [
+          "Bell",
+          "Locker"
+        ]
       ],
       [
         "Cinema",
-        "Popcorn"
+        [
+          "Popcorn",
+          "Tickets"
+        ]
       ],
       [
         "Airport",
-        "Suitcase"
+        [
+          "Suitcase",
+          "Boarding"
+        ]
       ],
       [
         "Hospital",
-        "Clipboard"
+        [
+          "Clipboard",
+          "Scrubs"
+        ]
       ],
       [
         "Park",
-        "Bench"
+        [
+          "Bench",
+          "Picnic"
+        ]
       ],
       [
         "Zoo",
-        "Map"
+        [
+          "Map",
+          "Enclosure"
+        ]
       ],
       [
         "Library",
-        "Silence"
+        [
+          "Silence",
+          "Bookmark"
+        ]
       ],
       [
         "Cafe",
-        "Mug"
+        [
+          "Mug",
+          "Latte"
+        ]
       ],
       [
         "Pool",
-        "Goggles"
+        [
+          "Goggles",
+          "Chlorine"
+        ]
       ],
       [
         "Farm",
-        "Fence"
+        [
+          "Fence",
+          "Hay"
+        ]
       ],
       [
         "Mall",
-        "Escalator"
+        [
+          "Escalator",
+          "Shop"
+        ]
       ]
     ],
     "medium": [
       [
         "Supermarket",
-        "Trolley"
+        [
+          "Trolley",
+          "Checkout"
+        ]
       ],
       [
         "Campsite",
-        "Lantern"
+        [
+          "Lantern",
+          "Tent"
+        ]
       ],
       [
         "Museum",
-        "Exhibit"
+        [
+          "Exhibit",
+          "Fossil"
+        ]
       ],
       [
         "Dentist",
-        "Drill"
+        [
+          "Drill",
+          "Teeth"
+        ]
       ],
       [
         "Stadium",
-        "Chant"
+        [
+          "Chant",
+          "Whistle"
+        ]
       ],
       [
         "Bakery",
-        "Dough"
+        [
+          "Dough",
+          "Bread"
+        ]
       ],
       [
         "Gym",
-        "Treadmill"
+        [
+          "Treadmill",
+          "Sweat"
+        ]
       ],
       [
         "Train station",
-        "Platform"
+        [
+          "Platform",
+          "Tracks"
+        ]
       ],
       [
         "Salon",
-        "Mirror"
+        [
+          "Mirror",
+          "Shampoo"
+        ]
       ],
       [
         "Aquarium",
-        "Glass"
+        [
+          "Glass",
+          "Coral"
+        ]
       ],
       [
         "Theatre",
-        "Curtain"
+        [
+          "Curtain",
+          "Spotlight"
+        ]
       ],
       [
         "Bowling alley",
-        "Pins"
+        [
+          "Pins",
+          "Strike"
+        ]
       ]
     ],
     "hard": [
       [
         "Embassy",
-        "Passport"
+        [
+          "Passport",
+          "Visa"
+        ]
       ],
       [
         "Observatory",
-        "Telescope"
+        [
+          "Telescope",
+          "Stars"
+        ]
       ],
       [
         "Courtroom",
-        "Gavel"
+        [
+          "Gavel",
+          "Jury"
+        ]
       ],
       [
         "Vineyard",
-        "Grapes"
+        [
+          "Grapes",
+          "Cork"
+        ]
       ],
       [
         "Cathedral",
-        "Bells"
+        [
+          "Bells",
+          "Organ"
+        ]
       ],
       [
         "Arcade",
-        "Tokens"
+        [
+          "Tokens",
+          "Joystick"
+        ]
       ],
       [
         "Harbour",
-        "Anchor"
+        [
+          "Anchor",
+          "Dock"
+        ]
       ],
       [
         "Gallery",
-        "Frame"
+        [
+          "Frame",
+          "Canvas"
+        ]
       ],
       [
         "Monastery",
-        "Quiet"
+        [
+          "Quiet",
+          "Chant"
+        ]
       ],
       [
         "Planetarium",
-        "Dome"
+        [
+          "Dome",
+          "Orbit"
+        ]
       ],
       [
         "Quarantine",
-        "Mask"
+        [
+          "Mask",
+          "Isolation"
+        ]
       ],
       [
         "Workshop",
-        "Saw"
+        [
+          "Saw",
+          "Hammer"
+        ]
       ]
     ]
   }

@@ -46,6 +46,7 @@ select {
 button {
   border: 0;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 button:disabled,

@@ -4,151 +4,259 @@ window.IMPOSTER_WORD_BANK.moments = {
     "easy": [
       [
         "Birthday",
-        "Candles"
+        [
+          "Candles",
+          "Cake"
+        ]
       ],
       [
         "Holiday",
-        "Suitcase"
+        [
+          "Suitcase",
+          "Passport"
+        ]
       ],
       [
         "Picnic",
-        "Blanket"
+        [
+          "Blanket",
+          "Basket"
+        ]
       ],
       [
         "Bedtime",
-        "Pajamas"
+        [
+          "Pajamas",
+          "Pillow"
+        ]
       ],
       [
         "Party",
-        "Confetti"
+        [
+          "Confetti",
+          "Music"
+        ]
       ],
       [
         "Dinner",
-        "Table"
+        [
+          "Table",
+          "Fork"
+        ]
       ],
       [
         "Rainy day",
-        "Puddles"
+        [
+          "Puddles",
+          "Umbrella"
+        ]
       ],
       [
         "Sleepover",
-        "Whispers"
+        [
+          "Whispers",
+          "Torch"
+        ]
       ],
       [
         "Graduation",
-        "Cap"
+        [
+          "Cap",
+          "Diploma"
+        ]
       ],
       [
         "Shopping",
-        "Receipt"
+        [
+          "Receipt",
+          "Bags"
+        ]
       ],
       [
         "Movie night",
-        "Couch"
+        [
+          "Couch",
+          "Popcorn"
+        ]
       ],
       [
         "Beach day",
-        "Sunscreen"
+        [
+          "Sunscreen",
+          "Towel"
+        ]
       ]
     ],
     "medium": [
       [
         "First date",
-        "Nerves"
+        [
+          "Nerves",
+          "Flowers"
+        ]
       ],
       [
         "Road trip",
-        "Playlist"
+        [
+          "Playlist",
+          "Map"
+        ]
       ],
       [
         "Exam day",
-        "Pencil"
+        [
+          "Pencil",
+          "Stress"
+        ]
       ],
       [
         "House move",
-        "Boxes"
+        [
+          "Boxes",
+          "Tape"
+        ]
       ],
       [
         "Wedding",
-        "Bouquet"
+        [
+          "Bouquet",
+          "Rings"
+        ]
       ],
       [
         "Camping",
-        "Lantern"
+        [
+          "Lantern",
+          "Fire"
+        ]
       ],
       [
         "Job interview",
-        "Handshake"
+        [
+          "Handshake",
+          "Resume"
+        ]
       ],
       [
         "Concert",
-        "Encore"
+        [
+          "Encore",
+          "Lights"
+        ]
       ],
       [
         "Game night",
-        "Dice"
+        [
+          "Dice",
+          "Cards"
+        ]
       ],
       [
         "Family dinner",
-        "Stories"
+        [
+          "Stories",
+          "Table"
+        ]
       ],
       [
         "Surprise party",
-        "Hiding"
+        [
+          "Hiding",
+          "Balloons"
+        ]
       ],
       [
         "Airport delay",
-        "Gate"
+        [
+          "Gate",
+          "Lounge"
+        ]
       ]
     ],
     "hard": [
       [
         "Nostalgia",
-        "Photobook"
+        [
+          "Photobook",
+          "Memory"
+        ]
       ],
       [
         "Reunion",
-        "Hug"
+        [
+          "Hug",
+          "Photos"
+        ]
       ],
       [
         "Deadline",
-        "Coffee"
+        [
+          "Coffee",
+          "Rush"
+        ]
       ],
       [
         "Confession",
-        "Pause"
+        [
+          "Pause",
+          "Secret"
+        ]
       ],
       [
         "Awkward silence",
-        "Cough"
+        [
+          "Cough",
+          "Stare"
+        ]
       ],
       [
         "Inside joke",
-        "Glance"
+        [
+          "Glance",
+          "Giggle"
+        ]
       ],
       [
         "Plot twist",
-        "Gasp"
+        [
+          "Gasp",
+          "Reveal"
+        ]
       ],
       [
         "Bad haircut",
-        "Beanie"
+        [
+          "Beanie",
+          "Mirror"
+        ]
       ],
       [
         "Deja vu",
-        "Loop"
+        [
+          "Loop",
+          "Echo"
+        ]
       ],
       [
         "Power outage",
-        "Candle"
+        [
+          "Candle",
+          "Blackout"
+        ]
       ],
       [
         "Missed call",
-        "Voicemail"
+        [
+          "Voicemail",
+          "Ringtone"
+        ]
       ],
       [
         "Group project",
-        "Slack"
+        [
+          "Slack",
+          "Slides"
+        ]
       ]
     ]
   }

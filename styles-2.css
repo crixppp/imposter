@@ -35,6 +35,16 @@
   transform: translateY(-1px);
 }
 
+.choice:active,
+.vote-choice:active,
+.primary:active,
+.secondary:active,
+.icon-button:active,
+.danger:active {
+  transform: translateY(1px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
 .choice.active {
   background: var(--yellow);
   box-shadow: 4px 4px 0 var(--ink);

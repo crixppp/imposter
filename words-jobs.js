@@ -4,151 +4,259 @@ window.IMPOSTER_WORD_BANK.jobs = {
     "easy": [
       [
         "Doctor",
-        "Stethoscope"
+        [
+          "Stethoscope",
+          "Clinic"
+        ]
       ],
       [
         "Teacher",
-        "Whiteboard"
+        [
+          "Whiteboard",
+          "Homework"
+        ]
       ],
       [
         "Chef",
-        "Apron"
+        [
+          "Apron",
+          "Kitchen"
+        ]
       ],
       [
         "Firefighter",
-        "Hose"
+        [
+          "Hose",
+          "Ladder"
+        ]
       ],
       [
         "Pilot",
-        "Runway"
+        [
+          "Runway",
+          "Cockpit"
+        ]
       ],
       [
         "Nurse",
-        "Bandage"
+        [
+          "Bandage",
+          "Chart"
+        ]
       ],
       [
         "Builder",
-        "Helmet"
+        [
+          "Helmet",
+          "Bricks"
+        ]
       ],
       [
         "Singer",
-        "Microphone"
+        [
+          "Microphone",
+          "Melody"
+        ]
       ],
       [
         "Farmer",
-        "Tractor"
+        [
+          "Tractor",
+          "Harvest"
+        ]
       ],
       [
         "Dancer",
-        "Stage"
+        [
+          "Stage",
+          "Ballet"
+        ]
       ],
       [
         "Driver",
-        "Steering"
+        [
+          "Steering",
+          "Road"
+        ]
       ],
       [
         "Waiter",
-        "Tray"
+        [
+          "Tray",
+          "Menu"
+        ]
       ]
     ],
     "medium": [
       [
         "Dentist",
-        "Floss"
+        [
+          "Floss",
+          "Teeth"
+        ]
       ],
       [
         "Architect",
-        "Blueprint"
+        [
+          "Blueprint",
+          "Ruler"
+        ]
       ],
       [
         "Journalist",
-        "Headline"
+        [
+          "Headline",
+          "Scoop"
+        ]
       ],
       [
         "Mechanic",
-        "Wrench"
+        [
+          "Wrench",
+          "Garage"
+        ]
       ],
       [
         "Florist",
-        "Bouquet"
+        [
+          "Bouquet",
+          "Petals"
+        ]
       ],
       [
         "Designer",
-        "Palette"
+        [
+          "Palette",
+          "Sketch"
+        ]
       ],
       [
         "Lawyer",
-        "Briefcase"
+        [
+          "Briefcase",
+          "Court"
+        ]
       ],
       [
         "Librarian",
-        "Shelves"
+        [
+          "Shelves",
+          "Books"
+        ]
       ],
       [
         "Photographer",
-        "Lens"
+        [
+          "Lens",
+          "Shutter"
+        ]
       ],
       [
         "Plumber",
-        "Pipe"
+        [
+          "Pipe",
+          "Leak"
+        ]
       ],
       [
         "Scientist",
-        "Beaker"
+        [
+          "Beaker",
+          "Lab"
+        ]
       ],
       [
         "Actor",
-        "Script"
+        [
+          "Script",
+          "Spotlight"
+        ]
       ]
     ],
     "hard": [
       [
         "Archaeologist",
-        "Fossil"
+        [
+          "Fossil",
+          "Dig"
+        ]
       ],
       [
         "Paramedic",
-        "Siren"
+        [
+          "Siren",
+          "Ambulance"
+        ]
       ],
       [
         "Barista",
-        "Crema"
+        [
+          "Crema",
+          "Latte"
+        ]
       ],
       [
         "Diplomat",
-        "Treaty"
+        [
+          "Treaty",
+          "Embassy"
+        ]
       ],
       [
         "Tailor",
-        "Thread"
+        [
+          "Thread",
+          "Needle"
+        ]
       ],
       [
         "Magician",
-        "Deck"
+        [
+          "Deck",
+          "Rabbit"
+        ]
       ],
       [
         "Translator",
-        "Subtitle"
+        [
+          "Subtitle",
+          "Language"
+        ]
       ],
       [
         "Producer",
-        "Credits"
+        [
+          "Credits",
+          "Studio"
+        ]
       ],
       [
         "Cartographer",
-        "Compass"
+        [
+          "Compass",
+          "Atlas"
+        ]
       ],
       [
         "Sommelier",
-        "Cork"
+        [
+          "Cork",
+          "Grapes"
+        ]
       ],
       [
         "Mediator",
-        "Truce"
+        [
+          "Truce",
+          "Peace"
+        ]
       ],
       [
         "Archivist",
-        "Records"
+        [
+          "Records",
+          "Files"
+        ]
       ]
     ]
   }

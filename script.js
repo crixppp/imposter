@@ -45,6 +45,8 @@ const state = {
   },
   names: DEFAULT_NAMES.slice(0, 5),
   scores: loadScores(),
+  usedWordKeys: [],
+  rulesOpen: false,
   error: "",
   round: null,
   timerId: null,

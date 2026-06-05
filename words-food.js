@@ -4,151 +4,259 @@ window.IMPOSTER_WORD_BANK.food = {
     "easy": [
       [
         "Pizza",
-        "Oven"
+        [
+          "Oven",
+          "Slice"
+        ]
       ],
       [
         "Burger",
-        "Grill"
+        [
+          "Grill",
+          "Bun"
+        ]
       ],
       [
         "Banana",
-        "Peel"
+        [
+          "Peel",
+          "Monkey"
+        ]
       ],
       [
         "Pancakes",
-        "Syrup"
+        [
+          "Syrup",
+          "Stack"
+        ]
       ],
       [
         "Cereal",
-        "Bowl"
+        [
+          "Bowl",
+          "Milk"
+        ]
       ],
       [
         "Ice cream",
-        "Cone"
+        [
+          "Cone",
+          "Freezer"
+        ]
       ],
       [
         "Popcorn",
-        "Cinema"
+        [
+          "Cinema",
+          "Butter"
+        ]
       ],
       [
         "Hot chips",
-        "Salt"
+        [
+          "Salt",
+          "Ketchup"
+        ]
       ],
       [
         "Donut",
-        "Sprinkles"
+        [
+          "Sprinkles",
+          "Glaze"
+        ]
       ],
       [
         "Toast",
-        "Butter"
+        [
+          "Butter",
+          "Crumbs"
+        ]
       ],
       [
         "Chocolate",
-        "Wrapper"
+        [
+          "Wrapper",
+          "Cocoa"
+        ]
       ],
       [
         "Watermelon",
-        "Picnic"
+        [
+          "Picnic",
+          "Seeds"
+        ]
       ]
     ],
     "medium": [
       [
         "Sushi",
-        "Wasabi"
+        [
+          "Wasabi",
+          "Seaweed"
+        ]
       ],
       [
         "Ramen",
-        "Steam"
+        [
+          "Steam",
+          "Noodles"
+        ]
       ],
       [
         "Tacos",
-        "Salsa"
+        [
+          "Salsa",
+          "Shell"
+        ]
       ],
       [
         "Curry",
-        "Spice"
+        [
+          "Spice",
+          "Turmeric"
+        ]
       ],
       [
         "Dumplings",
-        "Chopsticks"
+        [
+          "Chopsticks",
+          "Basket"
+        ]
       ],
       [
         "Pasta",
-        "Fork"
+        [
+          "Fork",
+          "Sauce"
+        ]
       ],
       [
         "Smoothie",
-        "Straw"
+        [
+          "Straw",
+          "Blender"
+        ]
       ],
       [
         "Lasagne",
-        "Layers"
+        [
+          "Layers",
+          "Oven"
+        ]
       ],
       [
         "Burrito",
-        "Foil"
+        [
+          "Foil",
+          "Beans"
+        ]
       ],
       [
         "Nachos",
-        "Crunch"
+        [
+          "Crunch",
+          "Cheese"
+        ]
       ],
       [
         "Bagel",
-        "Cream"
+        [
+          "Cream",
+          "Sesame"
+        ]
       ],
       [
         "Waffles",
-        "Grid"
+        [
+          "Grid",
+          "Squares"
+        ]
       ]
     ],
     "hard": [
       [
         "Tiramisu",
-        "Espresso"
+        [
+          "Espresso",
+          "Mascarpone"
+        ]
       ],
       [
         "Risotto",
-        "Stir"
+        [
+          "Stir",
+          "Rice"
+        ]
       ],
       [
         "Bao",
-        "Steam"
+        [
+          "Steam",
+          "Bamboo"
+        ]
       ],
       [
         "Kombucha",
-        "Fizz"
+        [
+          "Fizz",
+          "Bottle"
+        ]
       ],
       [
         "Falafel",
-        "Pita"
+        [
+          "Pita",
+          "Chickpea"
+        ]
       ],
       [
         "Croissant",
-        "Flake"
+        [
+          "Flake",
+          "Bakery"
+        ]
       ],
       [
         "Miso soup",
-        "Spoon"
+        [
+          "Spoon",
+          "Seaweed"
+        ]
       ],
       [
         "Gnocchi",
-        "Pillow"
+        [
+          "Pillow",
+          "Potato"
+        ]
       ],
       [
         "Macaron",
-        "Pastel"
+        [
+          "Pastel",
+          "Almond"
+        ]
       ],
       [
         "Paella",
-        "Saffron"
+        [
+          "Saffron",
+          "Pan"
+        ]
       ],
       [
         "Pho",
-        "Basil"
+        [
+          "Basil",
+          "Lime"
+        ]
       ],
       [
         "Bruschetta",
-        "Tomato"
+        [
+          "Tomato",
+          "Basil"
+        ]
       ]
     ]
   }

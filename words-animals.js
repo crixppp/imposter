@@ -4,151 +4,259 @@ window.IMPOSTER_WORD_BANK.animals = {
     "easy": [
       [
         "Dog",
-        "Leash"
+        [
+          "Leash",
+          "Collar"
+        ]
       ],
       [
         "Cat",
-        "Whiskers"
+        [
+          "Whiskers",
+          "Purr"
+        ]
       ],
       [
         "Shark",
-        "Fin"
+        [
+          "Fin",
+          "Teeth"
+        ]
       ],
       [
         "Penguin",
-        "Tuxedo"
+        [
+          "Tuxedo",
+          "Ice"
+        ]
       ],
       [
         "Kangaroo",
-        "Pouch"
+        [
+          "Pouch",
+          "Hop"
+        ]
       ],
       [
         "Horse",
-        "Saddle"
+        [
+          "Saddle",
+          "Hooves"
+        ]
       ],
       [
         "Snake",
-        "Shed"
+        [
+          "Shed",
+          "Venom"
+        ]
       ],
       [
         "Rabbit",
-        "Carrot"
+        [
+          "Carrot",
+          "Burrow"
+        ]
       ],
       [
         "Lion",
-        "Mane"
+        [
+          "Mane",
+          "Roar"
+        ]
       ],
       [
         "Elephant",
-        "Memory"
+        [
+          "Memory",
+          "Trunk"
+        ]
       ],
       [
         "Frog",
-        "Pond"
+        [
+          "Pond",
+          "Lily"
+        ]
       ],
       [
         "Duck",
-        "Waddle"
+        [
+          "Waddle",
+          "Quack"
+        ]
       ]
     ],
     "medium": [
       [
         "Octopus",
-        "Ink"
+        [
+          "Ink",
+          "Tentacle"
+        ]
       ],
       [
         "Wombat",
-        "Burrow"
+        [
+          "Burrow",
+          "Den"
+        ]
       ],
       [
         "Flamingo",
-        "Balance"
+        [
+          "Balance",
+          "Pink"
+        ]
       ],
       [
         "Chameleon",
-        "Camouflage"
+        [
+          "Camouflage",
+          "Color"
+        ]
       ],
       [
         "Meerkat",
-        "Lookout"
+        [
+          "Lookout",
+          "Scout"
+        ]
       ],
       [
         "Gorilla",
-        "Knuckles"
+        [
+          "Knuckles",
+          "Chest"
+        ]
       ],
       [
         "Jellyfish",
-        "Sting"
+        [
+          "Sting",
+          "Drift"
+        ]
       ],
       [
         "Koala",
-        "Eucalyptus"
+        [
+          "Eucalyptus",
+          "Gumtree"
+        ]
       ],
       [
         "Otter",
-        "Pebble"
+        [
+          "Pebble",
+          "River"
+        ]
       ],
       [
         "Hedgehog",
-        "Spikes"
+        [
+          "Spikes",
+          "Curl"
+        ]
       ],
       [
         "Toucan",
-        "Beak"
+        [
+          "Beak",
+          "Tropical"
+        ]
       ],
       [
         "Badger",
-        "Tunnel"
+        [
+          "Tunnel",
+          "Stripe"
+        ]
       ]
     ],
     "hard": [
       [
         "Axolotl",
-        "Regrowth"
+        [
+          "Regrowth",
+          "Gills"
+        ]
       ],
       [
         "Narwhal",
-        "Tusk"
+        [
+          "Tusk",
+          "Arctic"
+        ]
       ],
       [
         "Capybara",
-        "Chill"
+        [
+          "Chill",
+          "Spa"
+        ]
       ],
       [
         "Platypus",
-        "Bill"
+        [
+          "Bill",
+          "Creek"
+        ]
       ],
       [
         "Lemur",
-        "Ringtail"
+        [
+          "Ringtail",
+          "Jungle"
+        ]
       ],
       [
         "Mantis",
-        "Fold"
+        [
+          "Fold",
+          "Prayer"
+        ]
       ],
       [
         "Alpaca",
-        "Fleece"
+        [
+          "Fleece",
+          "Andes"
+        ]
       ],
       [
         "Pangolin",
-        "Scales"
+        [
+          "Scales",
+          "Armor"
+        ]
       ],
       [
         "Quokka",
-        "Smile"
+        [
+          "Smile",
+          "Perth"
+        ]
       ],
       [
         "Okapi",
-        "Stripes"
+        [
+          "Stripes",
+          "Forest"
+        ]
       ],
       [
         "Cassowary",
-        "Helmet"
+        [
+          "Helmet",
+          "Dagger"
+        ]
       ],
       [
         "Tapir",
-        "Snout"
+        [
+          "Snout",
+          "Jungle"
+        ]
       ]
     ]
   }
