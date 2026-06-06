@@ -42,6 +42,7 @@ function startRound() {
     finalGuess: "",
     remainingSeconds: state.settings.discussionSeconds,
     result: null,
+    scoreChanges: {},
     scoreApplied: false
   };
 
@@ -117,7 +118,9 @@ function finishRound(winner, reason) {
   state.round.result = { winner, reason };
   state.phase = "result";
   applyScore();
+  recordRoundHistory();
   saveScores();
+  saveHistory();
   render();
 }
 
@@ -127,6 +130,7 @@ function applyScore() {
   const winner = state.round.result.winner;
   const accused = getPlayer(state.round.accusedId);
   const accusedWrong = accused && accused.role !== "imposter";
+  state.round.scoreChanges = {};
 
   for (const player of state.round.players) {
     if (!state.scores[player.name]) {
@@ -134,13 +138,55 @@ function applyScore() {
     }
 
     if (winner === "players" && player.role === "player") {
-      state.scores[player.name] += 1;
+      awardPoint(player.name, 1);
     }
 
     if (winner === "imposters" && player.role === "imposter") {
-      state.scores[player.name] += accusedWrong ? 2 : 1;
+      awardPoint(player.name, accusedWrong ? 2 : 1);
     }
   }
 
   state.round.scoreApplied = true;
+}
+
+function awardPoint(name, amount) {
+  state.scores[name] += amount;
+  state.round.scoreChanges[name] = (state.round.scoreChanges[name] || 0) + amount;
+}
+
+function recordRoundHistory() {
+  if (state.round.historyApplied) return;
+
+  const counts = getVoteCounts();
+  const accused = getPlayer(state.round.accusedId);
+  const imposters = state.round.players.filter((player) => player.role === "imposter");
+  const previousRound = state.history[state.history.length - 1];
+  const previousNumber = previousRound && Number.isFinite(previousRound.number)
+    ? previousRound.number
+    : state.history.length;
+  const summary = {
+    number: previousNumber + 1,
+    word: state.round.secretWord,
+    category: state.round.categoryLabel,
+    difficulty: titleCase(state.round.difficulty),
+    mode: MODE_COPY[state.round.mode].label,
+    winner: state.round.result.winner,
+    winnerLabel: state.round.result.winner === "players" ? "Players" : "Imposters",
+    reason: state.round.result.reason,
+    imposters: imposters.map((player) => player.name),
+    accused: accused ? accused.name : "No accusation",
+    finalGuess: state.round.finalGuess || "",
+    scoreChanges: Object.entries(state.round.scoreChanges)
+      .map(([name, points]) => ({ name, points }))
+      .sort((a, b) => b.points - a.points || a.name.localeCompare(b.name)),
+    votes: state.round.players.map((player) => ({
+      id: player.id,
+      name: player.name,
+      count: counts[player.id] || 0,
+      accused: player.id === state.round.accusedId
+    }))
+  };
+
+  state.history = [...state.history, summary].slice(-MAX_HISTORY);
+  state.round.historyApplied = true;
 }

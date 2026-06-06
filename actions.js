@@ -220,6 +220,9 @@ function handleClick(event) {
       discussionSeconds: 120
     };
     state.names = DEFAULT_NAMES.slice(0, 5);
+    state.history = [];
+    state.usedWordKeys = [];
+    saveHistory();
     render();
   }
 

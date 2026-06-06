@@ -81,7 +81,7 @@ function renderSetup() {
         <div class="panel-body">
           <div class="player-list">
             ${setupPlayerRows().map((player, rank) => `
-              <label class="player-row">
+              <label class="player-row${player.leader ? " leader" : ""}">
                 <span class="index-pill">${rank + 1}</span>
                 <input data-player-name="${player.index}" value="${escapeAttr(player.name)}" aria-label="Player ${player.index + 1} name" maxlength="18">
                 <span class="score-pill">${player.score}</span>
@@ -174,6 +174,7 @@ function setupPlayerRows() {
   return state.names.map((name, index) => ({
     index,
     name,
-    score: getScore(name)
+    score: getScore(name),
+    leader: isLeaderName(name)
   })).sort((a, b) => b.score - a.score || a.index - b.index);
 }

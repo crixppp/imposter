@@ -90,6 +90,17 @@
   font-weight: 850;
 }
 
+.player-row.leader,
+.score-row.leader {
+  background: #fff3b0;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.player-row.leader .index-pill,
+.score-row.leader .score-pill {
+  background: var(--yellow);
+}
+
 .index-pill,
 .tag,
 .score-pill {

@@ -304,7 +304,7 @@ window.IMPOSTER_WORD_BANK.brands = {
         "Gucci",
         [
           "Runway",
-          "Logo"
+          "Handbag"
         ]
       ],
       [

@@ -1,4 +1,6 @@
 const STORAGE_KEY = "imposter-scores-v1";
+const HISTORY_STORAGE_KEY = "imposter-history-v1";
+const MAX_HISTORY = 12;
 
 const DEFAULT_NAMES = [
   "Alex",
@@ -16,6 +18,27 @@ const DEFAULT_NAMES = [
 ];
 
 const WORD_BANK = window.IMPOSTER_WORD_BANK;
+
+const GENERIC_HINTS = new Set([
+  "animal",
+  "brand",
+  "creature",
+  "dish",
+  "event",
+  "film",
+  "food",
+  "job",
+  "location",
+  "logo",
+  "meal",
+  "moment",
+  "movie",
+  "object",
+  "person",
+  "place",
+  "thing",
+  "work"
+]);
 
 const MODE_COPY = {
   classic: {
@@ -45,6 +68,7 @@ const state = {
   },
   names: DEFAULT_NAMES.slice(0, 5),
   scores: loadScores(),
+  history: loadHistory(),
   usedWordKeys: [],
   rulesOpen: false,
   error: "",
@@ -68,6 +92,23 @@ function loadScores() {
 function saveScores() {
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state.scores));
+  } catch {
+    // localStorage may be unavailable in private browsing.
+  }
+}
+
+function loadHistory() {
+  try {
+    const saved = window.localStorage.getItem(HISTORY_STORAGE_KEY);
+    return saved ? JSON.parse(saved) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveHistory() {
+  try {
+    window.localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(state.history));
   } catch {
     // localStorage may be unavailable in private browsing.
   }

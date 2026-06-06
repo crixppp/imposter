@@ -29,7 +29,8 @@
 .vote-list,
 .tally-list,
 .rules-list,
-.score-list {
+.score-list,
+.history-list {
   display: grid;
   gap: 8px;
 }
@@ -84,6 +85,26 @@
   margin-top: 16px;
   padding-top: 16px;
   border-top: 2px solid var(--ink);
+}
+
+.history-list {
+  margin-top: 18px;
+}
+
+.history-card {
+  display: grid;
+  gap: 6px;
+  padding: 10px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.history-card-main {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
 }
 
 .small-note {

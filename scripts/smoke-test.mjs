@@ -112,7 +112,7 @@ const result = vm.runInContext(`
       .map((hint) => String(hint || "").trim())
       .filter((hint) => {
         const hintKey = normalize(hint);
-        return !hint || /\\s/.test(hint) || !hintKey || hintKey === wordKey || wordKey.includes(hintKey) || hintKey.includes(wordKey);
+        return !hint || /\\s/.test(hint) || !hintKey || GENERIC_HINTS.has(hintKey) || hintKey === wordKey || wordKey.includes(hintKey) || hintKey.includes(wordKey);
       })
       .map((hint) => ({ word, hint }));
   });
@@ -121,6 +121,7 @@ const result = vm.runInContext(`
 
   state.phase = "setup";
   state.rulesOpen = false;
+  state.history = [];
   const setupHtml = renderSetup();
   handleClick({ target: { closest: () => ({ dataset: { action: "open-rules" } }) } });
   const rulesHtml = renderSetup();
@@ -130,6 +131,8 @@ const result = vm.runInContext(`
   const scoredSetupHtml = renderSetup();
   const scoredPlayerRows = setupPlayerRows();
   const namesAfterScoreSort = state.names.slice();
+  const setupHasLeaderClass = scoredSetupHtml.includes("player-row leader");
+  const setupLeaderNames = leaderNames(state.names);
 
   state.settings.categories = ["food"];
   state.settings.difficulty = "medium";
@@ -137,6 +140,7 @@ const result = vm.runInContext(`
   const foodMediumCount = WORD_BANK.food.words.medium.length;
   const pickedWords = Array.from({ length: foodMediumCount }, () => pickSecretWord(selectedCategoryKeys(), state.settings.difficulty).word);
   const nextWordAfterReset = pickSecretWord(selectedCategoryKeys(), state.settings.difficulty).word;
+  const usedWordsAfterReset = state.usedWordKeys.length;
 
   state.settings = {
     playerCount: 5,
@@ -148,6 +152,8 @@ const result = vm.runInContext(`
     discussionSeconds: 120
   };
   state.names = DEFAULT_NAMES.slice(0, 5);
+  state.scores = {};
+  state.history = [];
   state.usedWordKeys = [];
   startRound();
   state.phase = "voting";
@@ -160,13 +166,42 @@ const result = vm.runInContext(`
   const selectedHtml = renderVoting();
   const votesBeforeConfirm = Object.keys(state.round.votes).length;
   handleClick({ target: { closest: () => ({ dataset: { action: "confirm-vote" } }) } });
-  state.round.votes = { 1: 2, 2: 3, 3: 2, 4: 2, 5: 4 };
-  state.round.accusedId = 2;
-  state.round.tiedIds = [2];
-  state.round.result = { winner: "imposters", reason: "Blair was not an imposter." };
-  state.phase = "result";
+  const voteIndexAfterConfirm = state.round.voteIndex;
+  const recordedVote = state.round.votes[voter.id];
+
+  state.settings = {
+    playerCount: 5,
+    imposterCount: 1,
+    roundCount: 3,
+    categories: ["food"],
+    difficulty: "medium",
+    mode: "hinted",
+    discussionSeconds: 120
+  };
+  state.names = DEFAULT_NAMES.slice(0, 5);
+  state.scores = {};
+  state.history = [];
+  state.usedWordKeys = [];
+  startRound();
+  const wrongAccused = state.round.players.find((player) => player.role !== "imposter");
+  for (const player of state.round.players) {
+    state.round.votes[player.id] = wrongAccused.id;
+  }
+  state.round.accusedId = wrongAccused.id;
+  state.round.tiedIds = [wrongAccused.id];
+  finishRound("imposters", wrongAccused.name + " was not an imposter.");
   const resultHtml = renderResult();
   const voteBreakdownHtml = resultHtml.slice(resultHtml.indexOf("Votes received"));
+  const historyBeforeSameGroup = state.history.length;
+  const firstHistory = state.history[0];
+  const scoreChanges = Object.fromEntries(firstHistory.scoreChanges.map((change) => [change.name, change.points]));
+  const imposterNames = state.round.players.filter((player) => player.role === "imposter").map((player) => player.name);
+  const resultHasLeaderClass = resultHtml.includes("score-row leader");
+  handleClick({ target: { closest: () => ({ dataset: { action: "same-group" } }) } });
+  const historyAfterSameGroup = state.history.length;
+  const sameGroupSetupHtml = renderSetup();
+  handleClick({ target: { closest: () => ({ dataset: { action: "new-game" } }) } });
+  const historyAfterNewGame = state.history.length;
 
   return {
     entryCount: entries.length,
@@ -183,20 +218,29 @@ const result = vm.runInContext(`
     scoredPlayerNames: scoredPlayerRows.map((player) => player.name),
     scoredPlayerIndexes: scoredPlayerRows.map((player) => player.index),
     namesAfterScoreSort,
+    setupHasLeaderClass,
+    setupLeaderNames,
     noRepeatCount: new Set(pickedWords).size,
     noRepeatTotal: pickedWords.length,
     foodMediumCount,
     nextWordAfterReset,
-    usedWordsAfterReset: state.usedWordKeys.length,
+    usedWordsAfterReset,
     ballotUsesSelect: ballotHtml.includes('data-action="select-vote"') && !ballotHtml.includes('data-action="cast-vote"'),
     selectedShowsConfirm: selectedHtml.includes("Confirm vote"),
     votesBeforeConfirm,
-    voteIndexAfterConfirm: state.round.voteIndex,
-    recordedVote: state.round.votes[voter.id],
+    voteIndexAfterConfirm,
+    recordedVote,
     candidateId: candidate.id,
     resultHasVoteBreakdown: voteBreakdownHtml.includes("Votes received") && voteBreakdownHtml.includes("Accused"),
-    resultVoteBreakdownOrder: voteBreakdownHtml.indexOf("Blair") < voteBreakdownHtml.indexOf("Casey"),
-    resultVoteBreakdownHasCounts: voteBreakdownHtml.includes('<span class="score-pill">3</span>') && voteBreakdownHtml.includes('<span class="score-pill">1</span>')
+    resultVoteBreakdownHasCounts: voteBreakdownHtml.includes('<span class="score-pill">5</span>') && voteBreakdownHtml.includes('<span class="score-pill">0</span>'),
+    resultHasRoundHistory: resultHtml.includes("Round history") && resultHtml.includes("Round 1 complete"),
+    resultHasBetterRecap: resultHtml.includes("Category:") && resultHtml.includes("Accused:") && resultHtml.includes("Next round"),
+    resultHasScoreDelta: imposterNames.every((name) => resultHtml.includes("+2 " + name) && scoreChanges[name] === 2),
+    resultHasLeaderClass,
+    historyBeforeSameGroup,
+    historyAfterSameGroup,
+    historyAfterNewGame,
+    sameGroupKeepsHistoryVisible: sameGroupSetupHtml.includes("player-list")
   };
 })()
 `, context);
@@ -215,6 +259,8 @@ assert.equal(result.setupRemovesDuplicateScoreList, true);
 assert.equal(JSON.stringify(result.scoredPlayerNames.slice(0, 2)), JSON.stringify(["Drew", "Alex"]));
 assert.equal(JSON.stringify(result.scoredPlayerIndexes.slice(0, 2)), JSON.stringify([3, 0]));
 assert.equal(JSON.stringify(result.namesAfterScoreSort), JSON.stringify(["Alex", "Blair", "Casey", "Drew", "Ellis"]));
+assert.equal(result.setupHasLeaderClass, true);
+assert.equal(JSON.stringify(result.setupLeaderNames), JSON.stringify(["Drew"]));
 assert.equal(result.noRepeatCount, result.foodMediumCount);
 assert.equal(result.noRepeatTotal, result.foodMediumCount);
 assert.equal(typeof result.nextWordAfterReset, "string");
@@ -225,17 +271,43 @@ assert.equal(result.votesBeforeConfirm, 0);
 assert.equal(result.voteIndexAfterConfirm, 1);
 assert.equal(result.recordedVote, result.candidateId);
 assert.equal(result.resultHasVoteBreakdown, true);
-assert.equal(result.resultVoteBreakdownOrder, true);
 assert.equal(result.resultVoteBreakdownHasCounts, true);
+assert.equal(result.resultHasRoundHistory, true);
+assert.equal(result.resultHasBetterRecap, true);
+assert.equal(result.resultHasScoreDelta, true);
+assert.equal(result.resultHasLeaderClass, true);
+assert.equal(result.historyBeforeSameGroup, 1);
+assert.equal(result.historyAfterSameGroup, 1);
+assert.equal(result.historyAfterNewGame, 0);
+assert.equal(result.sameGroupKeepsHistoryVisible, true);
 
 const indexHtml = fs.readFileSync("index.html", "utf8");
 assert.match(indexHtml, /favicon\.png\?v=20260605/);
 assert.doesNotMatch(indexHtml, /favicon-\d+\.png/);
+assert.match(indexHtml, /manifest\.webmanifest/);
+assert.match(indexHtml, /apple-touch-icon\.png\?v=20260606/);
+
+const manifest = JSON.parse(fs.readFileSync("manifest.webmanifest", "utf8"));
+assert.equal(manifest.display, "standalone");
+assert.equal(manifest.start_url, "./");
+assert.equal(manifest.scope, "./");
+assert.equal(manifest.icons.some((icon) => icon.src === "icon-192.png" && icon.sizes === "192x192"), true);
+assert.equal(manifest.icons.some((icon) => icon.src === "icon-512.png" && icon.sizes === "512x512"), true);
+
+const serviceWorker = fs.readFileSync("service-worker.js", "utf8");
+assert.match(serviceWorker, /CACHE_NAME/);
+assert.match(serviceWorker, /manifest\.webmanifest/);
+assert.match(serviceWorker, /icon-512\.png/);
+assert.equal(fs.existsSync("apple-touch-icon.png"), true);
+assert.equal(fs.existsSync("icon-192.png"), true);
+assert.equal(fs.existsSync("icon-512.png"), true);
 
 const css = ["styles-1.css", "styles-2.css", "styles-3.css"]
   .map((file) => fs.readFileSync(file, "utf8"))
   .join("\n");
 assert.match(css, /:active/);
 assert.match(css, /modal-backdrop/);
+assert.match(css, /player-row\.leader/);
+assert.match(css, /history-card/);
 
 console.log("Smoke test passed");

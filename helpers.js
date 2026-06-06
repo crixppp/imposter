@@ -183,6 +183,7 @@ function isSafeHint(word, hint) {
     hint &&
     !/\s/.test(hint) &&
     normalizedHint &&
+    !GENERIC_HINTS.has(normalizedHint) &&
     normalizedHint !== normalizedWord &&
     !normalizedWord.includes(normalizedHint) &&
     !normalizedHint.includes(normalizedWord)
@@ -235,6 +236,33 @@ function getScore(name) {
 
 function stateHasScores() {
   return Object.keys(state.scores).length > 0;
+}
+
+function highScoreForNames(names) {
+  return Math.max(0, ...names.map((name) => getScore(name)));
+}
+
+function isLeaderName(name, names = state.names) {
+  const highScore = highScoreForNames(names);
+  return highScore > 0 && getScore(name) === highScore;
+}
+
+function leaderNames(names = state.names) {
+  return names.filter((name) => isLeaderName(name, names));
+}
+
+function leaderTagText(names = state.names) {
+  const leaders = leaderNames(names);
+
+  if (!leaders.length) {
+    return "Saved";
+  }
+
+  if (leaders.length === 1) {
+    return "Leader";
+  }
+
+  return `${leaders.length} leaders`;
 }
 
 function formatTime(totalSeconds) {

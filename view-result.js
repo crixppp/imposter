@@ -99,19 +99,23 @@ function renderResult() {
   const imposters = state.round.players.filter((player) => player.role === "imposter");
   const winnerLabel = result.winner === "players" ? "Players win" : "Imposter wins";
   const panelClass = result.winner === "players" ? "players" : "imposters";
+  const roundSummary = state.history[state.history.length - 1];
 
   return `
     <section class="result-grid">
       <div class="winner-panel ${panelClass}">
-        <span class="focus-kicker">Result</span>
+        <span class="focus-kicker">Round ${roundSummary ? roundSummary.number : state.history.length + 1} complete</span>
         <div class="winner-title">${winnerLabel}</div>
         <p class="subcopy">${escapeHtml(result.reason)}</p>
         <div class="reveal-strip">
           <span class="rule-chip">Word: ${escapeHtml(state.round.secretWord)}</span>
+          <span class="rule-chip">Category: ${escapeHtml(state.round.categoryLabel)}</span>
           <span class="rule-chip">Imposter: ${imposters.map((player) => escapeHtml(player.name)).join(", ")}</span>
+          <span class="rule-chip">Accused: ${escapeHtml(roundSummary ? roundSummary.accused : "No accusation")}</span>
         </div>
+        ${renderScoreDeltaStrip()}
         <div class="actions">
-          <button class="primary" data-action="same-group">Play again</button>
+          <button class="primary" data-action="same-group">Next round</button>
           <button class="secondary" data-action="new-game">New group</button>
         </div>
       </div>
@@ -119,11 +123,12 @@ function renderResult() {
       <aside class="panel">
         <div class="panel-head">
           <h2>Scores</h2>
-          <span class="tag yellow">Saved</span>
+          <span class="tag yellow">${escapeHtml(leaderTagText(state.round.players.map((player) => player.name)))}</span>
         </div>
         <div class="panel-body">
           ${renderCurrentScores()}
           ${renderResultVotes()}
+          ${renderRoundHistory()}
         </div>
       </aside>
     </section>
@@ -137,12 +142,30 @@ function renderCurrentScores() {
         .slice()
         .sort((a, b) => getScore(b.name) - getScore(a.name) || a.name.localeCompare(b.name))
         .map((player) => `
-          <div class="score-row">
+          <div class="score-row${isLeaderName(player.name, state.round.players.map((item) => item.name)) ? " leader" : ""}">
             <span class="score-pill">${getScore(player.name)}</span>
             <strong>${escapeHtml(player.name)}</strong>
             <span class="tag ${player.role === "imposter" ? "coral" : "mint"}">${player.role === "imposter" ? "Imposter" : "Player"}</span>
           </div>
         `).join("")}
+    </div>
+  `;
+}
+
+function renderScoreDeltaStrip() {
+  const changes = Object.entries(state.round.scoreChanges || {})
+    .filter((entry) => entry[1] > 0)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+
+  if (!changes.length) {
+    return `<p class="small-note">No score changes this round.</p>`;
+  }
+
+  return `
+    <div class="reveal-strip">
+      ${changes.map(([name, points]) => `
+        <span class="rule-chip">+${points} ${escapeHtml(name)}</span>
+      `).join("")}
     </div>
   `;
 }
@@ -167,6 +190,28 @@ function renderResultVotes() {
             </div>
           `;
         }).join("")}
+    </div>
+  `;
+}
+
+function renderRoundHistory() {
+  if (!state.history.length) {
+    return "";
+  }
+
+  return `
+    <div class="history-list">
+      <div class="field-label">Round history</div>
+      ${state.history.slice().reverse().map((item) => `
+        <div class="history-card">
+          <div class="history-card-main">
+            <span class="score-pill">${item.number}</span>
+            <strong>${escapeHtml(item.word)}</strong>
+            <span class="tag ${item.winner === "players" ? "mint" : "coral"}">${escapeHtml(item.winnerLabel)}</span>
+          </div>
+          <p class="small-note">Imposter: ${escapeHtml(item.imposters.join(", "))}. Accused: ${escapeHtml(item.accused)}.</p>
+        </div>
+      `).join("")}
     </div>
   `;
 }
