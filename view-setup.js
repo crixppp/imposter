@@ -81,15 +81,14 @@ function renderSetup() {
         </div>
         <div class="panel-body">
           <div class="player-list">
-            ${state.names.map((name, index) => `
+            ${setupPlayerRows().map((player, rank) => `
               <label class="player-row">
-                <span class="index-pill">${index + 1}</span>
-                <input data-player-name="${index}" value="${escapeAttr(name)}" aria-label="Player ${index + 1} name" maxlength="18">
-                <span class="score-pill">${getScore(name)}</span>
+                <span class="index-pill">${rank + 1}</span>
+                <input data-player-name="${player.index}" value="${escapeAttr(player.name)}" aria-label="Player ${player.index + 1} name" maxlength="18">
+                <span class="score-pill">${player.score}</span>
               </label>
             `).join("")}
           </div>
-          ${renderScoreList()}
         </div>
       </aside>
     </section>
@@ -172,23 +171,10 @@ function renderChoice(action, value, label, note, active) {
   `;
 }
 
-function renderScoreList() {
-  if (!stateHasScores()) {
-    return `<p class="small-note" style="margin-top: 14px;">Scores appear after the first round.</p>`;
-  }
-
-  return `
-    <div class="score-list" style="margin-top: 14px;">
-      ${Object.entries(state.scores)
-        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-        .slice(0, 5)
-        .map(([name, score]) => `
-          <div class="score-row">
-            <span class="score-pill">${score}</span>
-            <strong>${escapeHtml(name)}</strong>
-            <span></span>
-          </div>
-        `).join("")}
-    </div>
-  `;
+function setupPlayerRows() {
+  return state.names.map((name, index) => ({
+    index,
+    name,
+    score: getScore(name)
+  })).sort((a, b) => b.score - a.score || a.index - b.index);
 }

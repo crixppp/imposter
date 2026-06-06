@@ -96,6 +96,11 @@ const result = vm.runInContext(`
   handleClick({ target: { closest: () => ({ dataset: { action: "open-rules" } }) } });
   const rulesHtml = renderSetup();
   handleClick({ target: { closest: () => ({ dataset: { action: "close-rules" } }) } });
+  state.names = ["Alex", "Blair", "Casey", "Drew", "Ellis"];
+  state.scores = { Drew: 2, Alex: 1, Blair: 0, Casey: 0, Ellis: 0 };
+  const scoredSetupHtml = renderSetup();
+  const scoredPlayerRows = setupPlayerRows();
+  const namesAfterScoreSort = state.names.slice();
 
   state.settings.categories = ["food"];
   state.settings.difficulty = "medium";
@@ -134,6 +139,10 @@ const result = vm.runInContext(`
     setupHasRulesButton: setupHtml.includes('data-action="open-rules"'),
     rulesDialogVisible: state.rulesOpen === false && rulesHtml.includes('role="dialog"') && rulesHtml.includes("Caught imposters"),
     rulesHasScoringGuide: rulesHtml.includes("Scoring") && rulesHtml.includes("Players +1") && rulesHtml.includes("Imposters +2"),
+    setupRemovesDuplicateScoreList: !scoredSetupHtml.includes("score-list"),
+    scoredPlayerNames: scoredPlayerRows.map((player) => player.name),
+    scoredPlayerIndexes: scoredPlayerRows.map((player) => player.index),
+    namesAfterScoreSort,
     noRepeatCount: new Set(pickedWords).size,
     noRepeatTotal: pickedWords.length,
     thirteenthWord,
@@ -155,6 +164,10 @@ assert.equal(result.shortHintEntries.length, 0);
 assert.equal(result.setupHasRulesButton, true);
 assert.equal(result.rulesDialogVisible, true);
 assert.equal(result.rulesHasScoringGuide, true);
+assert.equal(result.setupRemovesDuplicateScoreList, true);
+assert.equal(JSON.stringify(result.scoredPlayerNames.slice(0, 2)), JSON.stringify(["Drew", "Alex"]));
+assert.equal(JSON.stringify(result.scoredPlayerIndexes.slice(0, 2)), JSON.stringify([3, 0]));
+assert.equal(JSON.stringify(result.namesAfterScoreSort), JSON.stringify(["Alex", "Blair", "Casey", "Drew", "Ellis"]));
 assert.equal(result.noRepeatCount, 12);
 assert.equal(result.noRepeatTotal, 12);
 assert.equal(typeof result.thirteenthWord, "string");
