@@ -61,11 +61,6 @@ function handleClick(event) {
     render();
   }
 
-  if (action === "randomize-names") {
-    state.names = shuffle(DEFAULT_NAMES).slice(0, state.settings.playerCount);
-    render();
-  }
-
   if (action === "open-rules") {
     state.rulesOpen = true;
     render();

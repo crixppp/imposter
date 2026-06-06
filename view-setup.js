@@ -68,7 +68,6 @@ function renderSetup() {
             <div class="actions">
               <button class="primary" type="button" data-action="start-round">Start round</button>
               <button class="secondary" type="button" data-action="open-rules">Rules</button>
-              <button class="secondary" type="button" data-action="randomize-names">Shuffle names</button>
             </div>
           </div>
         </form>

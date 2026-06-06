@@ -144,6 +144,7 @@ const result = vm.runInContext(`
     unsafeHints,
     shortHintEntries,
     setupHasRulesButton: setupHtml.includes('data-action="open-rules"'),
+    setupHasNoShuffleButton: !setupHtml.includes('data-action="randomize-names"') && !setupHtml.includes("Shuffle names"),
     rulesDialogVisible: state.rulesOpen === false && rulesHtml.includes('role="dialog"') && rulesHtml.includes("Caught imposters"),
     rulesHasScoringGuide: rulesHtml.includes("Scoring") && rulesHtml.includes("Players +1") && rulesHtml.includes("Imposters +2"),
     setupRemovesDuplicateScoreList: !scoredSetupHtml.includes("score-list"),
@@ -172,6 +173,7 @@ assert.equal(result.entryCount, 288);
 assert.equal(result.unsafeHints.length, 0);
 assert.equal(result.shortHintEntries.length, 0);
 assert.equal(result.setupHasRulesButton, true);
+assert.equal(result.setupHasNoShuffleButton, true);
 assert.equal(result.rulesDialogVisible, true);
 assert.equal(result.rulesHasScoringGuide, true);
 assert.equal(result.setupRemovesDuplicateScoreList, true);
