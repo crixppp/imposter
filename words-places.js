@@ -85,6 +85,34 @@ window.IMPOSTER_WORD_BANK.places = {
           "Escalator",
           "Shop"
         ]
+      ],
+      [
+        "Restaurant",
+        [
+          "Menu",
+          "Booth"
+        ]
+      ],
+      [
+        "Playground",
+        [
+          "Swing",
+          "Slide"
+        ]
+      ],
+      [
+        "Bank",
+        [
+          "Vault",
+          "Queue"
+        ]
+      ],
+      [
+        "Hotel",
+        [
+          "Lobby",
+          "Suitcase"
+        ]
       ]
     ],
     "medium": [
@@ -171,6 +199,34 @@ window.IMPOSTER_WORD_BANK.places = {
           "Pins",
           "Strike"
         ]
+      ],
+      [
+        "Pharmacy",
+        [
+          "Medicine",
+          "Counter"
+        ]
+      ],
+      [
+        "Office",
+        [
+          "Desk",
+          "Meeting"
+        ]
+      ],
+      [
+        "Church",
+        [
+          "Bell",
+          "Pew"
+        ]
+      ],
+      [
+        "Casino",
+        [
+          "Chips",
+          "Luck"
+        ]
       ]
     ],
     "hard": [
@@ -231,13 +287,6 @@ window.IMPOSTER_WORD_BANK.places = {
         ]
       ],
       [
-        "Monastery",
-        [
-          "Quiet",
-          "Chant"
-        ]
-      ],
-      [
         "Planetarium",
         [
           "Dome",
@@ -256,6 +305,41 @@ window.IMPOSTER_WORD_BANK.places = {
         [
           "Saw",
           "Hammer"
+        ]
+      ],
+      [
+        "Lighthouse",
+        [
+          "Beam",
+          "Coast"
+        ]
+      ],
+      [
+        "Warehouse",
+        [
+          "Forklift",
+          "Boxes"
+        ]
+      ],
+      [
+        "University",
+        [
+          "Lecture",
+          "Campus"
+        ]
+      ],
+      [
+        "Marina",
+        [
+          "Boats",
+          "Dock"
+        ]
+      ],
+      [
+        "Greenhouse",
+        [
+          "Glass",
+          "Plants"
         ]
       ]
     ]

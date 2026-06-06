@@ -85,6 +85,34 @@ window.IMPOSTER_WORD_BANK.moments = {
           "Sunscreen",
           "Towel"
         ]
+      ],
+      [
+        "Breakfast",
+        [
+          "Toast",
+          "Morning"
+        ]
+      ],
+      [
+        "School assembly",
+        [
+          "Principal",
+          "Stage"
+        ]
+      ],
+      [
+        "Family photo",
+        [
+          "Camera",
+          "Smile"
+        ]
+      ],
+      [
+        "Sports day",
+        [
+          "Whistle",
+          "Race"
+        ]
       ]
     ],
     "medium": [
@@ -171,6 +199,34 @@ window.IMPOSTER_WORD_BANK.moments = {
           "Gate",
           "Lounge"
         ]
+      ],
+      [
+        "First day",
+        [
+          "Nerves",
+          "Name"
+        ]
+      ],
+      [
+        "Talent show",
+        [
+          "Spotlight",
+          "Clap"
+        ]
+      ],
+      [
+        "Lost luggage",
+        [
+          "Carousel",
+          "Suitcase"
+        ]
+      ],
+      [
+        "Flat tyre",
+        [
+          "Jack",
+          "Roadside"
+        ]
       ]
     ],
     "hard": [
@@ -256,6 +312,34 @@ window.IMPOSTER_WORD_BANK.moments = {
         [
           "Slack",
           "Slides"
+        ]
+      ],
+      [
+        "Moving out",
+        [
+          "Boxes",
+          "Freedom"
+        ]
+      ],
+      [
+        "Blind date",
+        [
+          "Awkward",
+          "Roses"
+        ]
+      ],
+      [
+        "Karaoke night",
+        [
+          "Microphone",
+          "Lyrics"
+        ]
+      ],
+      [
+        "Secret Santa",
+        [
+          "Wrapping",
+          "Office"
         ]
       ]
     ]

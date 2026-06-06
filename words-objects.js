@@ -85,6 +85,34 @@ window.IMPOSTER_WORD_BANK.objects = {
           "Lens",
           "Frames"
         ]
+      ],
+      [
+        "Spoon",
+        [
+          "Cereal",
+          "Scoop"
+        ]
+      ],
+      [
+        "Towel",
+        [
+          "Shower",
+          "Beach"
+        ]
+      ],
+      [
+        "Bottle",
+        [
+          "Cap",
+          "Water"
+        ]
+      ],
+      [
+        "Hat",
+        [
+          "Brim",
+          "Sun"
+        ]
       ]
     ],
     "medium": [
@@ -171,6 +199,34 @@ window.IMPOSTER_WORD_BANK.objects = {
           "Echo",
           "Stage"
         ]
+      ],
+      [
+        "Speaker",
+        [
+          "Volume",
+          "Bass"
+        ]
+      ],
+      [
+        "Bracelet",
+        [
+          "Wrist",
+          "Charm"
+        ]
+      ],
+      [
+        "Paintbrush",
+        [
+          "Canvas",
+          "Bristles"
+        ]
+      ],
+      [
+        "Bicycle",
+        [
+          "Pedal",
+          "Chain"
+        ]
       ]
     ],
     "hard": [
@@ -256,6 +312,34 @@ window.IMPOSTER_WORD_BANK.objects = {
         [
           "Clip",
           "Climb"
+        ]
+      ],
+      [
+        "Drone",
+        [
+          "Propeller",
+          "Camera"
+        ]
+      ],
+      [
+        "Microscope",
+        [
+          "Slide",
+          "Lens"
+        ]
+      ],
+      [
+        "Padlock",
+        [
+          "Keyhole",
+          "Chain"
+        ]
+      ],
+      [
+        "Hourglass",
+        [
+          "Sand",
+          "Timer"
         ]
       ]
     ]

@@ -85,6 +85,34 @@ window.IMPOSTER_WORD_BANK.movies = {
           "Guitar",
           "Marigold"
         ]
+      ],
+      [
+        "Elf",
+        [
+          "Sleigh",
+          "Syrup"
+        ]
+      ],
+      [
+        "Aladdin",
+        [
+          "Lamp",
+          "Carpet"
+        ]
+      ],
+      [
+        "Sing",
+        [
+          "Stage",
+          "Microphone"
+        ]
+      ],
+      [
+        "Encanto",
+        [
+          "Candle",
+          "House"
+        ]
       ]
     ],
     "medium": [
@@ -171,16 +199,37 @@ window.IMPOSTER_WORD_BANK.movies = {
           "Wakanda",
           "Vibranium"
         ]
+      ],
+      [
+        "Home Alone",
+        [
+          "Traps",
+          "Christmas"
+        ]
+      ],
+      [
+        "The Notebook",
+        [
+          "Rain",
+          "Letters"
+        ]
+      ],
+      [
+        "School of Rock",
+        [
+          "Guitar",
+          "Classroom"
+        ]
+      ],
+      [
+        "Pitch Perfect",
+        [
+          "Cups",
+          "Choir"
+        ]
       ]
     ],
     "hard": [
-      [
-        "Parasite",
-        [
-          "Basement",
-          "Stairs"
-        ]
-      ],
       [
         "Interstellar",
         [
@@ -193,27 +242,6 @@ window.IMPOSTER_WORD_BANK.movies = {
         [
           "Tempo",
           "Drums"
-        ]
-      ],
-      [
-        "Casablanca",
-        [
-          "Piano",
-          "Morocco"
-        ]
-      ],
-      [
-        "Spirited Away",
-        [
-          "Bathhouse",
-          "Dragon"
-        ]
-      ],
-      [
-        "Memento",
-        [
-          "Tattoo",
-          "Memory"
         ]
       ],
       [
@@ -231,31 +259,87 @@ window.IMPOSTER_WORD_BANK.movies = {
         ]
       ],
       [
-        "Arrival",
+        "The Hunger Games",
         [
-          "Ink",
-          "Circle"
+          "Arena",
+          "Mockingjay"
         ]
       ],
       [
-        "Moonlight",
+        "The Hangover",
         [
-          "Blue",
-          "Ocean"
+          "Vegas",
+          "Tiger"
         ]
       ],
       [
-        "The Prestige",
+        "Fight Club",
         [
-          "Duel",
-          "Magic"
+          "Soap",
+          "Basement"
         ]
       ],
       [
-        "Amelie",
+        "The Truman Show",
         [
-          "Spoon",
-          "Paris"
+          "Camera",
+          "Dome"
+        ]
+      ],
+      [
+        "Little Women",
+        [
+          "Sisters",
+          "Manuscript"
+        ]
+      ],
+      [
+        "Knives Out",
+        [
+          "Mansion",
+          "Sweater"
+        ]
+      ],
+      [
+        "Get Out",
+        [
+          "Teacup",
+          "Hypnosis"
+        ]
+      ],
+      [
+        "The Social Network",
+        [
+          "Facebook",
+          "Lawsuit"
+        ]
+      ],
+      [
+        "Mad Max",
+        [
+          "Desert",
+          "Chase"
+        ]
+      ],
+      [
+        "The Godfather",
+        [
+          "Cannoli",
+          "Mafia"
+        ]
+      ],
+      [
+        "Good Will Hunting",
+        [
+          "Chalkboard",
+          "Bench"
+        ]
+      ],
+      [
+        "A Quiet Place",
+        [
+          "Silence",
+          "Monster"
         ]
       ]
     ]

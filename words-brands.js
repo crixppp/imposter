@@ -85,6 +85,34 @@ window.IMPOSTER_WORD_BANK.brands = {
           "Checkout",
           "Groceries"
         ]
+      ],
+      [
+        "Woolworths",
+        [
+          "Groceries",
+          "Green"
+        ]
+      ],
+      [
+        "KitKat",
+        [
+          "Break",
+          "Wafer"
+        ]
+      ],
+      [
+        "Subway",
+        [
+          "Footlong",
+          "Sandwich"
+        ]
+      ],
+      [
+        "Toyota",
+        [
+          "Corolla",
+          "Keys"
+        ]
       ]
     ],
     "medium": [
@@ -171,6 +199,34 @@ window.IMPOSTER_WORD_BANK.brands = {
           "Purple",
           "Chocolate"
         ]
+      ],
+      [
+        "Aldi",
+        [
+          "Middle",
+          "Bargain"
+        ]
+      ],
+      [
+        "Microsoft",
+        [
+          "Windows",
+          "Office"
+        ]
+      ],
+      [
+        "Snapchat",
+        [
+          "Ghost",
+          "Filter"
+        ]
+      ],
+      [
+        "Qantas",
+        [
+          "Kangaroo",
+          "Flight"
+        ]
       ]
     ],
     "hard": [
@@ -252,10 +308,38 @@ window.IMPOSTER_WORD_BANK.brands = {
         ]
       ],
       [
-        "Atlassian",
+        "Nespresso",
         [
-          "Tickets",
-          "Jira"
+          "Pod",
+          "Clooney"
+        ]
+      ],
+      [
+        "Rip Curl",
+        [
+          "Wetsuit",
+          "Waves"
+        ]
+      ],
+      [
+        "Converse",
+        [
+          "Laces",
+          "Star"
+        ]
+      ],
+      [
+        "Twitch",
+        [
+          "Stream",
+          "Chat"
+        ]
+      ],
+      [
+        "The North Face",
+        [
+          "Jacket",
+          "Summit"
         ]
       ]
     ]

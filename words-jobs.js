@@ -85,6 +85,34 @@ window.IMPOSTER_WORD_BANK.jobs = {
           "Tray",
           "Menu"
         ]
+      ],
+      [
+        "Cleaner",
+        [
+          "Mop",
+          "Bucket"
+        ]
+      ],
+      [
+        "Cashier",
+        [
+          "Register",
+          "Receipt"
+        ]
+      ],
+      [
+        "Police officer",
+        [
+          "Badge",
+          "Patrol"
+        ]
+      ],
+      [
+        "Hairdresser",
+        [
+          "Scissors",
+          "Salon"
+        ]
       ]
     ],
     "medium": [
@@ -171,6 +199,34 @@ window.IMPOSTER_WORD_BANK.jobs = {
           "Script",
           "Spotlight"
         ]
+      ],
+      [
+        "Electrician",
+        [
+          "Wire",
+          "Spark"
+        ]
+      ],
+      [
+        "Coach",
+        [
+          "Whistle",
+          "Team"
+        ]
+      ],
+      [
+        "Veterinarian",
+        [
+          "Paws",
+          "Clinic"
+        ]
+      ],
+      [
+        "Real estate agent",
+        [
+          "Keys",
+          "Auction"
+        ]
       ]
     ],
     "hard": [
@@ -231,31 +287,59 @@ window.IMPOSTER_WORD_BANK.jobs = {
         ]
       ],
       [
-        "Cartographer",
+        "DJ",
         [
-          "Compass",
-          "Atlas"
+          "Decks",
+          "Booth"
         ]
       ],
       [
-        "Sommelier",
+        "Tattooist",
         [
-          "Cork",
-          "Grapes"
+          "Ink",
+          "Needle"
         ]
       ],
       [
-        "Mediator",
+        "Baker",
         [
-          "Truce",
-          "Peace"
+          "Oven",
+          "Flour"
         ]
       ],
       [
-        "Archivist",
+        "Programmer",
         [
-          "Records",
-          "Files"
+          "Keyboard",
+          "Code"
+        ]
+      ],
+      [
+        "Tour guide",
+        [
+          "Map",
+          "Flag"
+        ]
+      ],
+      [
+        "Makeup artist",
+        [
+          "Brush",
+          "Mirror"
+        ]
+      ],
+      [
+        "Carpenter",
+        [
+          "Timber",
+          "Saw"
+        ]
+      ],
+      [
+        "Personal trainer",
+        [
+          "Weights",
+          "Gym"
         ]
       ]
     ]

@@ -77,6 +77,35 @@ const result = vm.runInContext(`
     )
   );
 
+  const removedWords = [
+    "Pangolin",
+    "Okapi",
+    "Tapir",
+    "Atlassian",
+    "Paella",
+    "Bruschetta",
+    "Cartographer",
+    "Sommelier",
+    "Mediator",
+    "Archivist",
+    "Parasite",
+    "Casablanca",
+    "Spirited Away",
+    "Memento",
+    "Arrival",
+    "Moonlight",
+    "The Prestige",
+    "Amelie",
+    "Monastery"
+  ].map((word) => word.toLowerCase());
+
+  const categorySizes = Object.fromEntries(Object.entries(WORD_BANK).map(([categoryKey, category]) => [
+    categoryKey,
+    Object.fromEntries(Object.entries(category.words).map(([difficulty, words]) => [difficulty, words.length]))
+  ]));
+
+  const removedEntries = entries.filter(({ word }) => removedWords.includes(word.toLowerCase()));
+
   const unsafeHints = entries.flatMap(({ word, hints }) => {
     const wordKey = normalize(word);
     return (Array.isArray(hints) ? hints : [hints])
@@ -105,8 +134,9 @@ const result = vm.runInContext(`
   state.settings.categories = ["food"];
   state.settings.difficulty = "medium";
   state.usedWordKeys = [];
-  const pickedWords = Array.from({ length: 12 }, () => pickSecretWord(selectedCategoryKeys(), state.settings.difficulty).word);
-  const thirteenthWord = pickSecretWord(selectedCategoryKeys(), state.settings.difficulty).word;
+  const foodMediumCount = WORD_BANK.food.words.medium.length;
+  const pickedWords = Array.from({ length: foodMediumCount }, () => pickSecretWord(selectedCategoryKeys(), state.settings.difficulty).word);
+  const nextWordAfterReset = pickSecretWord(selectedCategoryKeys(), state.settings.difficulty).word;
 
   state.settings = {
     playerCount: 5,
@@ -141,6 +171,8 @@ const result = vm.runInContext(`
   return {
     entryCount: entries.length,
     categoryCount: Object.keys(WORD_BANK).length,
+    categorySizes,
+    removedEntries,
     unsafeHints,
     shortHintEntries,
     setupHasRulesButton: setupHtml.includes('data-action="open-rules"'),
@@ -153,7 +185,8 @@ const result = vm.runInContext(`
     namesAfterScoreSort,
     noRepeatCount: new Set(pickedWords).size,
     noRepeatTotal: pickedWords.length,
-    thirteenthWord,
+    foodMediumCount,
+    nextWordAfterReset,
     usedWordsAfterReset: state.usedWordKeys.length,
     ballotUsesSelect: ballotHtml.includes('data-action="select-vote"') && !ballotHtml.includes('data-action="cast-vote"'),
     selectedShowsConfirm: selectedHtml.includes("Confirm vote"),
@@ -169,7 +202,9 @@ const result = vm.runInContext(`
 `, context);
 
 assert.equal(result.categoryCount, 8);
-assert.equal(result.entryCount, 288);
+assert.equal(result.entryCount, 384);
+assert.equal(Object.values(result.categorySizes).every((sizes) => Object.values(sizes).every((count) => count === 16)), true);
+assert.equal(result.removedEntries.length, 0);
 assert.equal(result.unsafeHints.length, 0);
 assert.equal(result.shortHintEntries.length, 0);
 assert.equal(result.setupHasRulesButton, true);
@@ -180,9 +215,9 @@ assert.equal(result.setupRemovesDuplicateScoreList, true);
 assert.equal(JSON.stringify(result.scoredPlayerNames.slice(0, 2)), JSON.stringify(["Drew", "Alex"]));
 assert.equal(JSON.stringify(result.scoredPlayerIndexes.slice(0, 2)), JSON.stringify([3, 0]));
 assert.equal(JSON.stringify(result.namesAfterScoreSort), JSON.stringify(["Alex", "Blair", "Casey", "Drew", "Ellis"]));
-assert.equal(result.noRepeatCount, 12);
-assert.equal(result.noRepeatTotal, 12);
-assert.equal(typeof result.thirteenthWord, "string");
+assert.equal(result.noRepeatCount, result.foodMediumCount);
+assert.equal(result.noRepeatTotal, result.foodMediumCount);
+assert.equal(typeof result.nextWordAfterReset, "string");
 assert.equal(result.usedWordsAfterReset, 1);
 assert.equal(result.ballotUsesSelect, true);
 assert.equal(result.selectedShowsConfirm, true);

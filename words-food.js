@@ -85,6 +85,34 @@ window.IMPOSTER_WORD_BANK.food = {
           "Picnic",
           "Seeds"
         ]
+      ],
+      [
+        "Sandwich",
+        [
+          "Picnic",
+          "Lunch"
+        ]
+      ],
+      [
+        "Cookie",
+        [
+          "Crumbs",
+          "Jar"
+        ]
+      ],
+      [
+        "Salad",
+        [
+          "Dressing",
+          "Leaves"
+        ]
+      ],
+      [
+        "Soup",
+        [
+          "Spoon",
+          "Steam"
+        ]
       ]
     ],
     "medium": [
@@ -171,6 +199,34 @@ window.IMPOSTER_WORD_BANK.food = {
           "Grid",
           "Squares"
         ]
+      ],
+      [
+        "Meatballs",
+        [
+          "Sauce",
+          "Fork"
+        ]
+      ],
+      [
+        "Omelette",
+        [
+          "Pan",
+          "Breakfast"
+        ]
+      ],
+      [
+        "Kebabs",
+        [
+          "Skewer",
+          "Charcoal"
+        ]
+      ],
+      [
+        "Cheesecake",
+        [
+          "Crust",
+          "Fridge"
+        ]
       ]
     ],
     "hard": [
@@ -238,13 +294,6 @@ window.IMPOSTER_WORD_BANK.food = {
         ]
       ],
       [
-        "Paella",
-        [
-          "Saffron",
-          "Pan"
-        ]
-      ],
-      [
         "Pho",
         [
           "Basil",
@@ -252,10 +301,45 @@ window.IMPOSTER_WORD_BANK.food = {
         ]
       ],
       [
-        "Bruschetta",
+        "Fajitas",
         [
-          "Tomato",
-          "Basil"
+          "Sizzle",
+          "Skillet"
+        ]
+      ],
+      [
+        "Churros",
+        [
+          "Cinnamon",
+          "Fair"
+        ]
+      ],
+      [
+        "Gelato",
+        [
+          "Scoop",
+          "Rome"
+        ]
+      ],
+      [
+        "Schnitzel",
+        [
+          "Crumb",
+          "Plate"
+        ]
+      ],
+      [
+        "Katsu",
+        [
+          "Crunch",
+          "Rice"
+        ]
+      ],
+      [
+        "Fondue",
+        [
+          "Skewer",
+          "Pot"
         ]
       ]
     ]

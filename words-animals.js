@@ -85,6 +85,34 @@ window.IMPOSTER_WORD_BANK.animals = {
           "Waddle",
           "Quack"
         ]
+      ],
+      [
+        "Tiger",
+        [
+          "Stripes",
+          "Jungle"
+        ]
+      ],
+      [
+        "Monkey",
+        [
+          "Banana",
+          "Swing"
+        ]
+      ],
+      [
+        "Giraffe",
+        [
+          "Neck",
+          "Spots"
+        ]
+      ],
+      [
+        "Bee",
+        [
+          "Honey",
+          "Sting"
+        ]
       ]
     ],
     "medium": [
@@ -171,6 +199,34 @@ window.IMPOSTER_WORD_BANK.animals = {
           "Tunnel",
           "Stripe"
         ]
+      ],
+      [
+        "Zebra",
+        [
+          "Stripes",
+          "Savanna"
+        ]
+      ],
+      [
+        "Seal",
+        [
+          "Flippers",
+          "Beach"
+        ]
+      ],
+      [
+        "Parrot",
+        [
+          "Pirate",
+          "Repeat"
+        ]
+      ],
+      [
+        "Deer",
+        [
+          "Antlers",
+          "Forest"
+        ]
       ]
     ],
     "hard": [
@@ -224,24 +280,10 @@ window.IMPOSTER_WORD_BANK.animals = {
         ]
       ],
       [
-        "Pangolin",
-        [
-          "Scales",
-          "Armor"
-        ]
-      ],
-      [
         "Quokka",
         [
           "Smile",
           "Perth"
-        ]
-      ],
-      [
-        "Okapi",
-        [
-          "Stripes",
-          "Forest"
         ]
       ],
       [
@@ -252,10 +294,52 @@ window.IMPOSTER_WORD_BANK.animals = {
         ]
       ],
       [
-        "Tapir",
+        "Walrus",
         [
-          "Snout",
-          "Jungle"
+          "Tusks",
+          "Moustache"
+        ]
+      ],
+      [
+        "Sloth",
+        [
+          "Slow",
+          "Branch"
+        ]
+      ],
+      [
+        "Porcupine",
+        [
+          "Quills",
+          "Needle"
+        ]
+      ],
+      [
+        "Pelican",
+        [
+          "Pouch",
+          "Pier"
+        ]
+      ],
+      [
+        "Hyena",
+        [
+          "Laugh",
+          "Savanna"
+        ]
+      ],
+      [
+        "Orca",
+        [
+          "Pod",
+          "Fin"
+        ]
+      ],
+      [
+        "Cheetah",
+        [
+          "Sprint",
+          "Spots"
         ]
       ]
     ]
