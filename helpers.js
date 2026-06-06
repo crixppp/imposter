@@ -150,7 +150,7 @@ function selectedCategorySummary() {
     return WORD_BANK[categories[0]].label;
   }
 
-  return `${categories.length} selected`;
+  return categories.length;
 }
 
 function sampleWords(categoryKey) {
