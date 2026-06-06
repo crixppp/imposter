@@ -123,6 +123,7 @@ function renderResult() {
         </div>
         <div class="panel-body">
           ${renderCurrentScores()}
+          ${renderResultVotes()}
         </div>
       </aside>
     </section>
@@ -142,6 +143,30 @@ function renderCurrentScores() {
             <span class="tag ${player.role === "imposter" ? "coral" : "mint"}">${player.role === "imposter" ? "Imposter" : "Player"}</span>
           </div>
         `).join("")}
+    </div>
+  `;
+}
+
+function renderResultVotes() {
+  const counts = getVoteCounts();
+  const playerOrder = new Map(state.round.players.map((player, index) => [player.id, index]));
+
+  return `
+    <div class="tally-list" style="margin-top: 18px;">
+      <div class="field-label">Votes received</div>
+      ${Object.entries(counts)
+        .sort((a, b) => b[1] - a[1] || playerOrder.get(Number(a[0])) - playerOrder.get(Number(b[0])))
+        .map(([id, count]) => {
+          const player = getPlayer(Number(id));
+          const accused = Number(id) === state.round.accusedId;
+          return `
+            <div class="tally-row ${accused ? "current" : ""}">
+              <span class="score-pill">${count}</span>
+              <strong>${escapeHtml(player.name)}</strong>
+              <span class="tag ${accused ? "coral" : ""}">${accused ? "Accused" : count === 1 ? "Vote" : "Votes"}</span>
+            </div>
+          `;
+        }).join("")}
     </div>
   `;
 }

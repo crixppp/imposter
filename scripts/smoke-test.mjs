@@ -130,6 +130,13 @@ const result = vm.runInContext(`
   const selectedHtml = renderVoting();
   const votesBeforeConfirm = Object.keys(state.round.votes).length;
   handleClick({ target: { closest: () => ({ dataset: { action: "confirm-vote" } }) } });
+  state.round.votes = { 1: 2, 2: 3, 3: 2, 4: 2, 5: 4 };
+  state.round.accusedId = 2;
+  state.round.tiedIds = [2];
+  state.round.result = { winner: "imposters", reason: "Blair was not an imposter." };
+  state.phase = "result";
+  const resultHtml = renderResult();
+  const voteBreakdownHtml = resultHtml.slice(resultHtml.indexOf("Votes received"));
 
   return {
     entryCount: entries.length,
@@ -152,7 +159,10 @@ const result = vm.runInContext(`
     votesBeforeConfirm,
     voteIndexAfterConfirm: state.round.voteIndex,
     recordedVote: state.round.votes[voter.id],
-    candidateId: candidate.id
+    candidateId: candidate.id,
+    resultHasVoteBreakdown: voteBreakdownHtml.includes("Votes received") && voteBreakdownHtml.includes("Accused"),
+    resultVoteBreakdownOrder: voteBreakdownHtml.indexOf("Blair") < voteBreakdownHtml.indexOf("Casey"),
+    resultVoteBreakdownHasCounts: voteBreakdownHtml.includes('<span class="score-pill">3</span>') && voteBreakdownHtml.includes('<span class="score-pill">1</span>')
   };
 })()
 `, context);
@@ -177,6 +187,9 @@ assert.equal(result.selectedShowsConfirm, true);
 assert.equal(result.votesBeforeConfirm, 0);
 assert.equal(result.voteIndexAfterConfirm, 1);
 assert.equal(result.recordedVote, result.candidateId);
+assert.equal(result.resultHasVoteBreakdown, true);
+assert.equal(result.resultVoteBreakdownOrder, true);
+assert.equal(result.resultVoteBreakdownHasCounts, true);
 
 const indexHtml = fs.readFileSync("index.html", "utf8");
 assert.match(indexHtml, /favicon\.png\?v=20260605/);
