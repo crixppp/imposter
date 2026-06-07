@@ -1,4 +1,4 @@
-const CACHE_NAME = "imposter-v20260607-1";
+const CACHE_NAME = "imposter-v20260607-2";
 const APP_SHELL = [
   "./",
   "./index.html",
