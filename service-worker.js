@@ -1,4 +1,4 @@
-const CACHE_NAME = "imposter-v20260607-2";
+const CACHE_NAME = "imposter-v20260608-1";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -25,10 +25,7 @@ const APP_SHELL = [
   "./view-play.js",
   "./view-result.js",
   "./boot.js",
-  "./favicon.png",
-  "./apple-touch-icon.png",
-  "./icon-192.png",
-  "./icon-512.png",
+  "./favicon.png?v=20260608",
   "./imposter_logo_transparent.png"
 ];
 

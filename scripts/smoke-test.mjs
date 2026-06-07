@@ -318,22 +318,21 @@ assert.equal(result.historyAfterNewGame, 0);
 assert.equal(result.sameGroupKeepsHistoryVisible, true);
 
 const indexHtml = fs.readFileSync("index.html", "utf8");
-assert.match(indexHtml, /favicon\.png\?v=20260605/);
+assert.match(indexHtml, /favicon\.png\?v=20260608/);
 assert.doesNotMatch(indexHtml, /favicon-\d+\.png/);
 assert.match(indexHtml, /manifest\.webmanifest/);
-assert.match(indexHtml, /apple-touch-icon\.png\?v=20260606/);
+assert.match(indexHtml, /rel="apple-touch-icon" href="favicon\.png\?v=20260608"/);
 
 const manifest = JSON.parse(fs.readFileSync("manifest.webmanifest", "utf8"));
 assert.equal(manifest.display, "standalone");
 assert.equal(manifest.start_url, "./");
 assert.equal(manifest.scope, "./");
-assert.equal(manifest.icons.some((icon) => icon.src === "icon-192.png" && icon.sizes === "192x192"), true);
-assert.equal(manifest.icons.some((icon) => icon.src === "icon-512.png" && icon.sizes === "512x512"), true);
+assert.equal(manifest.icons.some((icon) => icon.src === "favicon.png?v=20260608" && icon.sizes === "1254x1254"), true);
 
 const serviceWorker = fs.readFileSync("service-worker.js", "utf8");
 assert.match(serviceWorker, /CACHE_NAME/);
 assert.match(serviceWorker, /manifest\.webmanifest/);
-assert.match(serviceWorker, /icon-512\.png/);
+assert.match(serviceWorker, /favicon\.png\?v=20260608/);
 assert.equal(fs.existsSync("apple-touch-icon.png"), true);
 assert.equal(fs.existsSync("icon-192.png"), true);
 assert.equal(fs.existsSync("icon-512.png"), true);
