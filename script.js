@@ -4,18 +4,18 @@ const MAX_HISTORY = 12;
 const MIN_PLAYERS = 3;
 
 const DEFAULT_NAMES = [
-  "Alex",
-  "Blair",
-  "Casey",
-  "Drew",
-  "Ellis",
-  "Frankie",
-  "Gray",
-  "Harper",
-  "Indie",
-  "Jules",
-  "Kai",
-  "Logan"
+  "Player 1",
+  "Player 2",
+  "Player 3",
+  "Player 4",
+  "Player 5",
+  "Player 6",
+  "Player 7",
+  "Player 8",
+  "Player 9",
+  "Player 10",
+  "Player 11",
+  "Player 12"
 ];
 
 const WORD_BANK = window.IMPOSTER_WORD_BANK;
