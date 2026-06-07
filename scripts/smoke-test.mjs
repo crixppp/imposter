@@ -133,6 +133,24 @@ const result = vm.runInContext(`
   const namesAfterScoreSort = state.names.slice();
   const setupHasLeaderClass = scoredSetupHtml.includes("player-row leader");
   const setupLeaderNames = leaderNames(state.names);
+  const removableHtml = renderSetup();
+  const removeAvailableAtFive = removableHtml.includes('data-action="remove-player"') && removableHtml.includes('aria-label="Remove Blair"');
+  handleClick({ target: { closest: () => ({ dataset: { action: "remove-player", value: "1" } }) } });
+  const namesAfterPlayerRemove = state.names.slice();
+  const countAfterPlayerRemove = state.settings.playerCount;
+  setPlayerCount(MIN_PLAYERS);
+  const threePlayerValidation = validatePlayers(normalizedPlayers());
+  state.error = "";
+  startRound();
+  const threePlayerRoundSize = state.round.players.length;
+  const threePlayerRoundPhase = state.phase;
+  state.phase = "setup";
+  state.round = null;
+  const threePlayerHtml = renderSetup();
+  const noRemoveAtMinimum = !threePlayerHtml.includes('data-action="remove-player"');
+  handleClick({ target: { closest: () => ({ dataset: { action: "remove-player", value: "0" } }) } });
+  const countAfterBlockedRemove = state.settings.playerCount;
+  const namesAfterBlockedRemove = state.names.slice();
 
   state.settings.categories = ["food"];
   state.settings.difficulty = "medium";
@@ -220,6 +238,15 @@ const result = vm.runInContext(`
     namesAfterScoreSort,
     setupHasLeaderClass,
     setupLeaderNames,
+    removeAvailableAtFive,
+    namesAfterPlayerRemove,
+    countAfterPlayerRemove,
+    threePlayerValidation,
+    threePlayerRoundSize,
+    threePlayerRoundPhase,
+    noRemoveAtMinimum,
+    countAfterBlockedRemove,
+    namesAfterBlockedRemove,
     noRepeatCount: new Set(pickedWords).size,
     noRepeatTotal: pickedWords.length,
     foodMediumCount,
@@ -261,6 +288,15 @@ assert.equal(JSON.stringify(result.scoredPlayerIndexes.slice(0, 2)), JSON.string
 assert.equal(JSON.stringify(result.namesAfterScoreSort), JSON.stringify(["Alex", "Blair", "Casey", "Drew", "Ellis"]));
 assert.equal(result.setupHasLeaderClass, true);
 assert.equal(JSON.stringify(result.setupLeaderNames), JSON.stringify(["Drew"]));
+assert.equal(result.removeAvailableAtFive, true);
+assert.equal(JSON.stringify(result.namesAfterPlayerRemove), JSON.stringify(["Alex", "Casey", "Drew", "Ellis"]));
+assert.equal(result.countAfterPlayerRemove, 4);
+assert.equal(result.threePlayerValidation, "");
+assert.equal(result.threePlayerRoundSize, 3);
+assert.equal(result.threePlayerRoundPhase, "reveal");
+assert.equal(result.noRemoveAtMinimum, true);
+assert.equal(result.countAfterBlockedRemove, 3);
+assert.equal(JSON.stringify(result.namesAfterBlockedRemove), JSON.stringify(["Alex", "Casey", "Drew"]));
 assert.equal(result.noRepeatCount, result.foodMediumCount);
 assert.equal(result.noRepeatTotal, result.foodMediumCount);
 assert.equal(typeof result.nextWordAfterReset, "string");
@@ -308,6 +344,7 @@ const css = ["styles-1.css", "styles-2.css", "styles-3.css"]
 assert.match(css, /:active/);
 assert.match(css, /modal-backdrop/);
 assert.match(css, /player-row\.leader/);
+assert.match(css, /remove-player-button/);
 assert.match(css, /history-card/);
 
 console.log("Smoke test passed");

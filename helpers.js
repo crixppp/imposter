@@ -40,8 +40,8 @@ function normalizedPlayers() {
 }
 
 function validatePlayers(players) {
-  if (players.length < 4) {
-    return "Use at least 4 players.";
+  if (players.length < MIN_PLAYERS) {
+    return `Use at least ${MIN_PLAYERS} players.`;
   }
 
   const names = players.map((player) => player.name.toLowerCase());

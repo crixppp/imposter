@@ -28,6 +28,10 @@ function handleClick(event) {
     setPlayerCount(state.settings.playerCount + numericValue);
   }
 
+  if (action === "remove-player") {
+    removePlayer(Number(value));
+  }
+
   if (action === "change-imposters") {
     setImposterCount(state.settings.imposterCount + numericValue);
   }
@@ -234,7 +238,7 @@ function handleClick(event) {
 }
 
 function setPlayerCount(count) {
-  const nextCount = clamp(count, 4, DEFAULT_NAMES.length);
+  const nextCount = clamp(count, MIN_PLAYERS, DEFAULT_NAMES.length);
   state.settings.playerCount = nextCount;
 
   while (state.names.length < nextCount) {
@@ -243,6 +247,21 @@ function setPlayerCount(count) {
 
   state.names = state.names.slice(0, nextCount);
   state.settings.imposterCount = Math.min(state.settings.imposterCount, maxImposters(nextCount));
+  state.error = "";
+  render();
+}
+
+function removePlayer(index) {
+  if (state.settings.playerCount <= MIN_PLAYERS) return;
+  if (!Number.isInteger(index) || index < 0 || index >= state.names.length) return;
+
+  state.names.splice(index, 1);
+  state.settings.playerCount = Math.max(MIN_PLAYERS, state.settings.playerCount - 1);
+  state.names = state.names.slice(0, state.settings.playerCount);
+  state.settings.imposterCount = Math.min(
+    state.settings.imposterCount,
+    maxImposters(state.settings.playerCount)
+  );
   state.error = "";
   render();
 }

@@ -1,6 +1,7 @@
 const STORAGE_KEY = "imposter-scores-v1";
 const HISTORY_STORAGE_KEY = "imposter-history-v1";
 const MAX_HISTORY = 12;
+const MIN_PLAYERS = 3;
 
 const DEFAULT_NAMES = [
   "Alex",

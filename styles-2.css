@@ -69,7 +69,6 @@
 .vote-row,
 .tally-row {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 10px;
   min-height: 48px;
@@ -77,6 +76,17 @@
   border: 2px solid var(--ink);
   border-radius: var(--radius);
   background: var(--surface);
+}
+
+.player-row {
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+}
+
+.score-row,
+.order-row,
+.vote-row,
+.tally-row {
+  grid-template-columns: auto minmax(0, 1fr) auto;
 }
 
 .player-row input {
@@ -140,6 +150,35 @@
 
 .score-pill {
   background: var(--yellow);
+}
+
+.remove-player-button {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: #ffe4df;
+  color: var(--ink);
+  font-weight: 950;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.92);
+  transition: opacity 140ms ease, transform 140ms ease, background 140ms ease;
+}
+
+.player-row:hover .remove-player-button,
+.player-row:focus-within .remove-player-button,
+.remove-player-button:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.remove-player-button:hover {
+  background: var(--coral);
+  color: #fff;
 }
 
 .actions {

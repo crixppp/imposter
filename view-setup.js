@@ -23,7 +23,7 @@ function renderSetup() {
             <div class="field-grid">
               <label class="field">
                 <span class="field-label">Players</span>
-                ${renderStepper("change-count", state.settings.playerCount, 4, DEFAULT_NAMES.length)}
+                ${renderStepper("change-count", state.settings.playerCount, MIN_PLAYERS, DEFAULT_NAMES.length)}
               </label>
 
               <label class="field">
@@ -81,11 +81,14 @@ function renderSetup() {
         <div class="panel-body">
           <div class="player-list">
             ${setupPlayerRows().map((player, rank) => `
-              <label class="player-row${player.leader ? " leader" : ""}">
+              <div class="player-row${player.leader ? " leader" : ""}">
                 <span class="index-pill">${rank + 1}</span>
                 <input data-player-name="${player.index}" value="${escapeAttr(player.name)}" aria-label="Player ${player.index + 1} name" maxlength="18">
                 <span class="score-pill">${player.score}</span>
-              </label>
+                ${state.settings.playerCount > MIN_PLAYERS ? `
+                  <button class="remove-player-button" type="button" data-action="remove-player" data-value="${player.index}" aria-label="Remove ${escapeAttr(player.name)}" title="Remove player">x</button>
+                ` : ""}
+              </div>
             `).join("")}
           </div>
         </div>
